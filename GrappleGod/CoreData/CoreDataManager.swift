@@ -73,7 +73,7 @@ final class CoreDataManager {
     // Mark: Methods
     
     func getSettings() -> Any {
-        let moc = CoreDataManager.sharedInstance.managedObjectContext
+        let moc = self.managedObjectContext
         let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Settings")
         
         do {
@@ -94,7 +94,7 @@ final class CoreDataManager {
     }
     
     func initializeSettings() -> Void {
-        let moc = CoreDataManager.sharedInstance.managedObjectContext
+        let moc = self.managedObjectContext
         
         
         let entityDescription = NSEntityDescription.entity(forEntityName: "Settings", in: moc)!
