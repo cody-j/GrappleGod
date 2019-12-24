@@ -16,14 +16,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         super.init(size: size)
         
         self.scaleMode = .resizeFill
+        self.physicsWorld.contactDelegate = self
     }
     
     override func didMove(to view: SKView) {
-        print("setting up")
-        
+
         let legend = Legend(texture: nil, size: Constants.LegendSize)
-        legend.position = CGPoint(x: CGFloat(100), y: CGFloat(100))
-        
         
         self.addChild(legend)
         
@@ -32,6 +30,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func update(_ currentTime: TimeInterval) {
         
     }
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

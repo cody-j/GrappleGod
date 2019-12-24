@@ -16,6 +16,8 @@ class Legend: SKSpriteNode, Entity {
     
     convenience init(texture: SKTexture!, size: CGSize) {
         self.init(texture: SKTexture(imageNamed: "Up"), color: .clear, size: size)
+        
+        self.position = CGPoint(x: CGFloat(100), y: CGFloat(100))
     }
     
     func update() {
