@@ -7,22 +7,33 @@
 //
 
 import SpriteKit
+import RealmSwift
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
-//    var legend: Legend
+    // Mark: Entities
+    var legend: Entity!
+    
+    // Mark: Game Configuration
+    var settings: Settings?
     
     override init(size: CGSize) {
         super.init(size: size)
         
         self.scaleMode = .resizeFill
         self.physicsWorld.contactDelegate = self
+        
+        // Query Realm for game state from Realm
+        settings = GameData.sharedInstance.getSettings()
+        
+        // Init Entites
+        legend = Legend(texture: nil, size: Constants.LegendSize)
+        
     }
     
     override func didMove(to view: SKView) {
-
-        let legend = Legend(texture: nil, size: Constants.LegendSize)
         
+        // Add Entities
         self.addChild(legend)
         
     }
