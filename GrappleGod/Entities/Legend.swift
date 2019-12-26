@@ -11,16 +11,14 @@ import SpriteKit
 class Legend: SKSpriteNode, Entity {
     
     override init(texture: SKTexture!, color: SKColor!, size: CGSize) {
-        super.init(texture: texture, color: color, size: size)
-    }
-    
-    convenience init(texture: SKTexture!, size: CGSize) {
-        self.init(texture: SKTexture(imageNamed: "Up"), color: .clear, size: size)
+        super.init(texture: SKTexture(imageNamed: "Up"), color: .clear, size: size)
         
-        self.position = CGPoint(x: CGFloat(100), y: CGFloat(100))
+        self.position = CGPoint(x: CGFloat(0), y: CGFloat(0))
     }
     
-    func update() {
+    
+    // MARK: Update
+    func update(gameScene: GameSceneProto) {
         print("Hello")
     }
     

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		531F644123B567C00083E2B0 /* GameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531F644023B567C00083E2B0 /* GameData.swift */; };
+		531F644323B572890083E2B0 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531F644223B572890083E2B0 /* Camera.swift */; };
 		535352512395E13F00E61DB7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535352502395E13F00E61DB7 /* AppDelegate.swift */; };
 		535352592395E13F00E61DB7 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535352582395E13F00E61DB7 /* GameViewController.swift */; };
 		5353525C2395E13F00E61DB7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5353525A2395E13F00E61DB7 /* Main.storyboard */; };
@@ -18,6 +19,7 @@
 		5353527E239774B700E61DB7 /* Legend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5353527D239774B700E61DB7 /* Legend.swift */; };
 		535352802397781500E61DB7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5353527F2397781500E61DB7 /* Constants.swift */; };
 		5353528B2397853700E61DB7 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5353528A2397853700E61DB7 /* GameScene.swift */; };
+		53540ADB23B5786F00197931 /* GameSceneProto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53540ADA23B5786F00197931 /* GameSceneProto.swift */; };
 		7205F99BB2738EFF635DCD26 /* Pods_GrappleGod.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB6D1F3B45BB56A27FC75771 /* Pods_GrappleGod.framework */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +36,7 @@
 /* Begin PBXFileReference section */
 		233A26C6050CF4CF90611461 /* Pods-GrappleGod.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GrappleGod.release.xcconfig"; path = "Target Support Files/Pods-GrappleGod/Pods-GrappleGod.release.xcconfig"; sourceTree = "<group>"; };
 		531F644023B567C00083E2B0 /* GameData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameData.swift; sourceTree = "<group>"; };
+		531F644223B572890083E2B0 /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		5353524D2395E13F00E61DB7 /* GrappleGod.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GrappleGod.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		535352502395E13F00E61DB7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		535352582395E13F00E61DB7 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -48,6 +51,7 @@
 		5353527D239774B700E61DB7 /* Legend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Legend.swift; sourceTree = "<group>"; };
 		5353527F2397781500E61DB7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5353528A2397853700E61DB7 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		53540ADA23B5786F00197931 /* GameSceneProto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneProto.swift; sourceTree = "<group>"; };
 		85CA6E7839A9BAC8FCA60B04 /* Pods-GrappleGod.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GrappleGod.debug.xcconfig"; path = "Target Support Files/Pods-GrappleGod/Pods-GrappleGod.debug.xcconfig"; sourceTree = "<group>"; };
 		DB6D1F3B45BB56A27FC75771 /* Pods_GrappleGod.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GrappleGod.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -139,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				5353527A2397734F00E61DB7 /* Entity.swift */,
+				53540ADA23B5786F00197931 /* GameSceneProto.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -147,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				5353527D239774B700E61DB7 /* Legend.swift */,
+				531F644223B572890083E2B0 /* Camera.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -304,10 +310,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				531F644323B572890083E2B0 /* Camera.swift in Sources */,
 				5353527B2397734F00E61DB7 /* Entity.swift in Sources */,
 				5353527E239774B700E61DB7 /* Legend.swift in Sources */,
 				5353528B2397853700E61DB7 /* GameScene.swift in Sources */,
 				535352592395E13F00E61DB7 /* GameViewController.swift in Sources */,
+				53540ADB23B5786F00197931 /* GameSceneProto.swift in Sources */,
 				531F644123B567C00083E2B0 /* GameData.swift in Sources */,
 				535352512395E13F00E61DB7 /* AppDelegate.swift in Sources */,
 				535352802397781500E61DB7 /* Constants.swift in Sources */,

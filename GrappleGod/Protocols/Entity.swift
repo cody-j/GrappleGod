@@ -10,6 +10,6 @@ import SpriteKit
 
 protocol Entity: SKNode {
     
-    func update()
+    func update(gameScene: GameSceneProto)
     
 }
