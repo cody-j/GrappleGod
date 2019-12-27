@@ -19,6 +19,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneProto {
     // Mark: Game Configuration
     var settings: Settings!
     
+    // MARK: Game State
+    var score: Int = 0
+    var playerSpeed: CGFloat = 0
+
+//    var powerup: Powerup
+    
     override init(size: CGSize) {
 
         super.init(size: size)
@@ -45,7 +51,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneProto {
         // Add Camera
         self.addChild(cameraNode)
         self.camera = cameraNode
-
+        
+        let hud = HUD()
+        cameraNode.addChild(hud)
         // Add Entities
         self.addChild(world)
         self.addChild(legend)

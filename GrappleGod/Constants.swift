@@ -17,6 +17,11 @@ struct Constants {
     static let GameTitle: String = "Grapple God"
     static let GameSubTitle: String = "It's OK"
 
+    // MARK: Button Names
+    static let JumpName: String = "jump"
+    static let GrappleName: String = "grapple"
+    static let HomeName: String = "home"
+    static let ActionButtonName: String = "ActionButton"
     // MARK: Category Masks
     static let GroundCat: UInt32 = 0x1 << 0 // 1
     static let RoofCat: UInt32 = 0x1 << 1 // 2

@@ -15,7 +15,7 @@ class Camera: SKCameraNode, Entity {
 
         self.name = "Camera"
         self.position = Constants.Origin
-
+        
     }
     
     func configure(gameScene: GameSceneProto) {
