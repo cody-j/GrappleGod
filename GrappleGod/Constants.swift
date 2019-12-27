@@ -14,6 +14,9 @@ func rgb(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat) -> UIColor {
 }
 
 struct Constants {
+    static let GameTitle: String = "Grapple God"
+    static let GameSubTitle: String = "It's OK"
+
     // MARK: Category Masks
     static let GroundCat: UInt32 = 0x1 << 0 // 1
     static let RoofCat: UInt32 = 0x1 << 1 // 2
