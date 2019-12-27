@@ -13,12 +13,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneProto {
     
     // MARK: Entities
     var legend: Legend!
+    var world: World!
     var cameraNode: Camera!
     
     // Mark: Game Configuration
     var settings: Settings!
     
     override init(size: CGSize) {
+
         super.init(size: size)
         
         self.scaleMode = .resizeFill
@@ -29,16 +31,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneProto {
         settings = GameData.sharedInstance.getSettings()
         
         // Init Entites
+        world = World()
         legend = Legend(texture: nil, size: Constants.LegendSize)
-
+        
+        // Set up camera
         cameraNode = Camera()
+        cameraNode.configure(gameScene: self)
+
     }
     
     override func didMove(to view: SKView) {
-        
-        // Add Entities
-        self.addChild(legend)
+
+        // Add Camera
+        self.addChild(cameraNode)
         self.camera = cameraNode
+
+        // Add Entities
+        self.addChild(world)
+        self.addChild(legend)
     }
     
     override func update(_ currentTime: TimeInterval) {

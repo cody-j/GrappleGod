@@ -20,6 +20,8 @@
 		535352802397781500E61DB7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5353527F2397781500E61DB7 /* Constants.swift */; };
 		5353528B2397853700E61DB7 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5353528A2397853700E61DB7 /* GameScene.swift */; };
 		53540ADB23B5786F00197931 /* GameSceneProto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53540ADA23B5786F00197931 /* GameSceneProto.swift */; };
+		53540ADD23B5897500197931 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53540ADC23B5897400197931 /* Level.swift */; };
+		53540ADF23B589A100197931 /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53540ADE23B589A100197931 /* World.swift */; };
 		7205F99BB2738EFF635DCD26 /* Pods_GrappleGod.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB6D1F3B45BB56A27FC75771 /* Pods_GrappleGod.framework */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +54,8 @@
 		5353527F2397781500E61DB7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5353528A2397853700E61DB7 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		53540ADA23B5786F00197931 /* GameSceneProto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneProto.swift; sourceTree = "<group>"; };
+		53540ADC23B5897400197931 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
+		53540ADE23B589A100197931 /* World.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = World.swift; sourceTree = "<group>"; };
 		85CA6E7839A9BAC8FCA60B04 /* Pods-GrappleGod.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GrappleGod.debug.xcconfig"; path = "Target Support Files/Pods-GrappleGod/Pods-GrappleGod.debug.xcconfig"; sourceTree = "<group>"; };
 		DB6D1F3B45BB56A27FC75771 /* Pods_GrappleGod.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GrappleGod.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -153,6 +157,8 @@
 			children = (
 				5353527D239774B700E61DB7 /* Legend.swift */,
 				531F644223B572890083E2B0 /* Camera.swift */,
+				53540ADC23B5897400197931 /* Level.swift */,
+				53540ADE23B589A100197931 /* World.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -317,7 +323,9 @@
 				535352592395E13F00E61DB7 /* GameViewController.swift in Sources */,
 				53540ADB23B5786F00197931 /* GameSceneProto.swift in Sources */,
 				531F644123B567C00083E2B0 /* GameData.swift in Sources */,
+				53540ADF23B589A100197931 /* World.swift in Sources */,
 				535352512395E13F00E61DB7 /* AppDelegate.swift in Sources */,
+				53540ADD23B5897500197931 /* Level.swift in Sources */,
 				535352802397781500E61DB7 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -13,7 +13,7 @@ class Legend: SKSpriteNode, Entity {
     override init(texture: SKTexture!, color: SKColor!, size: CGSize) {
         super.init(texture: SKTexture(imageNamed: "Up"), color: .clear, size: size)
         
-        self.position = CGPoint(x: CGFloat(0), y: CGFloat(0))
+        self.position = Constants.Origin
     }
     
     

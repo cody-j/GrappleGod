@@ -14,10 +14,24 @@ class Camera: SKCameraNode, Entity {
         super.init()
 
         self.name = "Camera"
-        self.position = CGPoint(x: 0, y: 0)
+        self.position = Constants.Origin
+
     }
     
+    func configure(gameScene: GameSceneProto) {
+        self.setBackground(bounds: gameScene.frame.size)
+    }
 
+    func setBackground(bounds: CGSize) {
+        let bgX = -(bounds.width/2)
+        let bgY = -(bounds.height/2)
+        let bg = SKShapeNode(rect: CGRect(origin: CGPoint(x: bgX, y: bgY), size: bounds))
+        bg.fillColor = Constants.BackgroundColor
+        
+        self.addChild(bg)
+    }
+    
+    
     // MARK: Update
     func update(gameScene: GameSceneProto) {
         
