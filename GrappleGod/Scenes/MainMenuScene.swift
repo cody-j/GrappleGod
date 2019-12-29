@@ -11,16 +11,12 @@ import SpriteKit
 class MainMenuScene: SKScene {
        
     var button: SKLabelNode!
-
-    var centerX: CGFloat!
-    var centerY: CGFloat!
     
     override init(size: CGSize) {
         super.init(size: size)
         
-        
-        self.centerX = self.frame.size.width/2
-        self.centerY = self.frame.size.height/2
+        self.scaleMode = .resizeFill
+        self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         
         self.backgroundColor = Constants.BackgroundColor
         
@@ -33,14 +29,14 @@ class MainMenuScene: SKScene {
         let title = SKLabelNode(text: Constants.GameTitle)
         title.fontColor = .black
         title.fontSize = 90
-        title.position = CGPoint(x: self.centerX, y: self.centerY + 30)
+        title.position = CGPoint(x: 0, y: 30)
         self.addChild(title)
     }
 
     func generateGameStartButton() {
         button = SKLabelNode(text: "Game Start")
         button.fontColor = .black
-        button.position = CGPoint(x: self.centerX, y: self.centerY - 80)
+        button.position = CGPoint(x: 0, y: -80)
         self.addChild(button)
     }
     
