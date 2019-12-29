@@ -38,7 +38,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneProto {
         
         // Init Entites
         world = World()
-        legend = Legend(texture: nil, size: Constants.LegendSize)
+        legend = Legend()
         
         // Set up camera
         cameraNode = Camera()
@@ -60,7 +60,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneProto {
     }
     
     override func update(_ currentTime: TimeInterval) {
-//        legend.update()
+//        legend.update(gameScene: self)
+    }
+    
+    override func didFinishUpdate() {
         cameraNode.update(gameScene: self)
     }
     

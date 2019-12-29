@@ -10,16 +10,33 @@ import SpriteKit
 
 class Legend: SKSpriteNode, Entity {
     
-    override init(texture: SKTexture!, color: SKColor!, size: CGSize) {
-        super.init(texture: SKTexture(imageNamed: "Up"), color: .clear, size: size)
+    init() {
+        super.init(texture: SKTexture(imageNamed: "Up"), color: .clear, size: Constants.LegendSize)
         
         self.position = Constants.Origin
+        
+        let pb = SKPhysicsBody(rectangleOf: size)
+        pb.isDynamic = true
+        pb.affectedByGravity = true
+        pb.density = 5
+        pb.restitution = 0
+        pb.allowsRotation = false
+        pb.friction = 0.6
+        
+        self.physicsBody = pb
+        self.name = "Legend"
     }
     
     
     // MARK: Update
     func update(gameScene: GameSceneProto) {
-        print("Hello")
+        print("hello")
+    }
+    
+    
+    
+    func didFinishUpdate() {
+        print("finished", self.position.y)
     }
     
     required init?(coder aDecoder: NSCoder) {

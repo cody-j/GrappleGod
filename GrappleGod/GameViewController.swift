@@ -22,6 +22,7 @@ class GameViewController: UIViewController {
             let scene = MainMenuScene(size: view.bounds.size)
             
             view.showsFPS = true
+            view.showsPhysics = true
             view.presentScene(scene)
         }
 
