@@ -20,6 +20,7 @@ struct Constants {
     // MARK: Button Names
     static let JumpName: String = "jump"
     static let GrappleName: String = "grapple"
+    static let MoveName: String = "move"
     static let HomeName: String = "home"
     static let ActionButtonName: String = "ActionButton"
     // MARK: Category Masks

@@ -17,15 +17,21 @@ class HUD: SKNode {
         let centerX: CGFloat = self.frame.width/2
         let centerY: CGFloat = self.frame.height/2
 
-        let jumpButton = generateButton(name: Constants.JumpName, position: CGPoint(x: centerX + 200, y: centerY - 100))
+        let moveButton = generateButton(name: Constants.MoveName, size: CGSize(width: 120, height: 120), position: CGPoint(x: centerX - 260, y: centerY - 120))
+        let jumpButton = generateButton(name: Constants.JumpName, position: CGPoint(x: centerX + 190, y: centerY - 140))
+        let grappleButton = generateButton(name: Constants.GrappleName, position: CGPoint(x: centerX + 280, y: centerY - 40))
+        
+        self.name = "HUD"
         self.addChild(jumpButton)
+        self.addChild(grappleButton)
+        self.addChild(moveButton)
     }
     
-    func generateButton(name: String, buttonSize: CGSize = CGSize(width: 20, height: 20), position: CGPoint) -> SKSpriteNode {
+    func generateButton(name: String, size: CGSize = CGSize(width: 80, height: 80), position: CGPoint) -> SKSpriteNode {
         let button = SKSpriteNode(imageNamed: Constants.ActionButtonName)
         
         button.name = name
-        button.size = buttonSize
+        button.size = size
         button.position = position
         return button
     }

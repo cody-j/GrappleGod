@@ -59,6 +59,37 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneProto {
         self.addChild(legend)
     }
     
+    
+    // MARK: Touches
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch in touches {
+            let hud = self.cameraNode!.childNode(withName: "HUD")
+            let location = touch.location(in: hud!)
+            let touched = hud?.nodes(at: location)
+            
+            for node in touched! {
+                switch node.name {
+                case Constants.JumpName:
+                    print("jumping")
+                case Constants.GrappleName:
+                    print("grappling")
+                case Constants.MoveName:
+                    print("moving")
+                default:
+                    print("hud element not registered")
+                }
+            }
+
+        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch in touches {
+            
+        }
+    }
+    
+    // MARK: Game Loop
     override func update(_ currentTime: TimeInterval) {
 //        legend.update(gameScene: self)
     }

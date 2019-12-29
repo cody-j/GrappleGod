@@ -22,7 +22,8 @@ class Legend: SKSpriteNode, Entity {
         pb.restitution = 0
         pb.allowsRotation = false
         pb.friction = 0.6
-        
+        pb.collisionBitMask = Constants.LegendCat
+
         self.physicsBody = pb
         self.name = "Legend"
     }
@@ -31,12 +32,6 @@ class Legend: SKSpriteNode, Entity {
     // MARK: Update
     func update(gameScene: GameSceneProto) {
         print("hello")
-    }
-    
-    
-    
-    func didFinishUpdate() {
-        print("finished", self.position.y)
     }
     
     required init?(coder aDecoder: NSCoder) {

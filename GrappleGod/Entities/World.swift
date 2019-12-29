@@ -18,26 +18,21 @@ class World: SKNode, Entity {
     }
     
     
+    
     func generateStart() {
-        let startHeight = 30
-        let startWidth = 200
-        let startOrigin = CGPoint(x: 0, y: 0)
-        
-        let startSize = CGSize(width: startWidth, height: startHeight)
-        let startRect = CGRect(origin: startOrigin, size: startSize)
-        
-        let startNode = SKShapeNode(rect: startRect)
-        
-        // Configure physicsbody
-        let pb = SKPhysicsBody(rectangleOf: startSize)
+
+        let startNode = SKSpriteNode(texture: SKTexture(imageNamed: "PlainHorizontal"), size: CGSize(width: 1400, height: 20))
+        startNode.position = CGPoint(x: -100, y: -200)
+
+        let pb = SKPhysicsBody(texture: startNode.texture!, size: CGSize(width: 1400, height: 20))
         pb.affectedByGravity = false
         pb.allowsRotation = false
         pb.restitution = 0.2
         pb.friction = 0.6
-        pb.isDynamic = true
+        pb.isDynamic = false
+        pb.categoryBitMask = Constants.LegendCat
         
         startNode.physicsBody = pb
-        startNode.fillColor = Constants.StartingBlockColor
         
         self.addChild(startNode)
     }
