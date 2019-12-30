@@ -9,6 +9,9 @@
 import SpriteKit
 
 class Grapple: SKSpriteNode, Entity {
+
+    // MARK: Child Nodes
+    var rope: SKPhysicsJointSpring!
     
     init() {
         let grappleSize = CGSize(width: 23, height: 23)
@@ -33,8 +36,26 @@ class Grapple: SKSpriteNode, Entity {
         self.run(action)
     }
     
-    func update(gameScene: GameSceneProto) {
+    
+    func hook(roof: SKNode, legend: SKNode, world: SKNode, point: CGPoint) {
+        self.physicsBody?.isDynamic = false
         
+        rope = SKPhysicsJointSpring.joint(withBodyA: roof.physicsBody!, bodyB: legend.physicsBody!, anchorA: point, anchorB: legend.convert(Constants.Origin, to: scene!))
+        self.scene!.physicsWorld.add(rope)
+
+//        rope.frequency = 4
+//        rope.damping = 0.5
+    }
+    
+    func removeHook() {
+        scene!.physicsWorld.remove(rope)
+        self.physicsBody?.isDynamic = true
+        self.removeFromParent()
+    }
+    
+    
+    func update(gameScene: GameSceneProto) {
+        // Set angle to be in line with legend. Potentially redo pixel art to be proper angle, or just set image angle as ∆
     }
     
     required init?(coder aDecoder: NSCoder) {

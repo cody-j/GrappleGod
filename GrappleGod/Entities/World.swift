@@ -27,7 +27,7 @@ class World: SKNode, Entity {
         let pb = SKPhysicsBody(texture: startNode.texture!, size: startSize)
         pb.affectedByGravity = false
         pb.allowsRotation = false
-        pb.restitution = 0.2
+        pb.restitution = 0
         pb.friction = 0.6
         pb.isDynamic = false
         pb.categoryBitMask = Constants.GroundCat

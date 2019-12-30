@@ -33,6 +33,7 @@ class Legend: SKSpriteNode, Entity {
         pb.categoryBitMask = Constants.LegendCat
         pb.collisionBitMask = Constants.GroundCat
         pb.contactTestBitMask = 0
+        pb.linearDamping = Constants.LegendSpeedDamping
         self.physicsBody = pb
         
         
@@ -70,8 +71,7 @@ class Legend: SKSpriteNode, Entity {
     
     func endGrapple() {
         self.isGrappling = false
-        self.grapple.removeFromParent()
-//        print("ending: ", self.grapple.position)
+        self.grapple.removeHook()
     }
     
     // MARK: Update

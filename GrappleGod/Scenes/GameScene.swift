@@ -64,8 +64,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneProto {
         self.camera = cameraNode
         
         // Add Entities to root tree
+        
+        world.addChild(legend)
+        
         self.addChild(world)
-        self.addChild(legend)
     }
     
     
@@ -153,16 +155,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneProto {
     
     // MARK: Physics Contact Delegate
     func didBegin(_ contact: SKPhysicsContact) {
-        if contact.bodyB.node?.name == Constants.GrappleName {
-            print("start", self.legend.grapple.position)
+//        if contact.bodyB.node?.name == Constants.GrappleName {
+//            print("start", self.legend.grapple.position)
+//        }
+        
+        let A = contact.bodyA.node!
+        let B = contact.bodyB.node!
+        let isGrapple = B.name == Constants.GrappleName
+        let isRoof = A.name == "roof"
+        
+        if isGrapple && isRoof {
+            print(contact.contactPoint)
+            print(self.legend.grapple.position)
+            print("A", A.position)
+            print("B", B.position)
+            self.legend.grapple.hook(roof: contact.bodyA.node!, legend: self.legend, world: self.world, point: contact.contactPoint)
         }
-//        print(contact.bodyA.node?.name)
-//        print(contact.bodyB.node?.name)
+
     }
     
     func didEnd(_ contact: SKPhysicsContact) {
-        if contact.bodyB.node?.name == Constants.GrappleName {
-            print("end", self.legend.grapple.position)
+        let isGrapple = contact.bodyB.node?.name == Constants.GrappleName
+        let isRoof = contact.bodyA.node?.name == "roof"
+
+        if isGrapple && isRoof {
         }
     }
     required init?(coder aDecoder: NSCoder) {
