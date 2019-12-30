@@ -10,6 +10,8 @@ import SpriteKit
 
 class World: SKNode, Entity {
     
+    var worldXlimit: CGFloat = 4000
+    
     override init() {
         super.init()
         
@@ -20,8 +22,12 @@ class World: SKNode, Entity {
     
     
     func generateStart() {
-        let startSize = CGSize(width: 3000, height: 40)
-        let startNode = SKSpriteNode(texture: SKTexture(imageNamed: "start"), size: startSize)
+        let startSize = Constants.StartPlatformSize
+        let startNode = SKSpriteNode(texture: SKTexture(imageNamed: "platform_1"), size: startSize)
+        
+        let startPlatformTextures = [SKTexture(imageNamed: "platform_1"), SKTexture(imageNamed: "platform_2")]
+        let platformAnimation = SKAction.repeatForever(SKAction.animate(with: startPlatformTextures, timePerFrame: 0.8))
+        startNode.run(platformAnimation, withKey: "platform hover")
         startNode.position = CGPoint(x: 0, y: -200)
         startNode.name = "ground"
         let pb = SKPhysicsBody(texture: startNode.texture!, size: startSize)
@@ -41,9 +47,9 @@ class World: SKNode, Entity {
     
     
     func generateGrapplePad() -> SKSpriteNode {
-        let size = CGSize(width: 220, height: 50)
+        let size = Constants.GrapplePadSize
         
-        let node = SKSpriteNode(texture: SKTexture(imageNamed: "start"), size: size)
+        let node = SKSpriteNode(texture: SKTexture(imageNamed: "grapple_pad"), size: size)
         node.name = "roof"
         let pb = SKPhysicsBody(texture: node.texture!, size: size)
         pb.affectedByGravity = false
@@ -64,16 +70,22 @@ class World: SKNode, Entity {
     
     func generateLevel() {
         for i in 0...6 {
+            let yPosition = CGFloat(500)
+            let padSpacing = CGFloat(600)
+            let padDelta = Constants.GrapplePadSize.width + padSpacing
+            
             let grapplePad = generateGrapplePad()
-            let y = CGFloat(100)
-            let x = CGFloat(i*400)
+            let x = CGFloat(CGFloat(i) * padDelta)
         
-            grapplePad.position = CGPoint(x: x, y: y)
+            grapplePad.position = CGPoint(x: x, y: yPosition)
             self.addChild(grapplePad)
         }
     }
     
-    func update(gameScene: GameSceneProto) {}
+    func update(gameScene: GameSceneProto) {
+        
+        
+    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

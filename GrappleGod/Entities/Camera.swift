@@ -16,6 +16,8 @@ class Camera: SKCameraNode, Entity {
         self.name = "Camera"
         self.position = Constants.Origin
         
+        self.xScale = 2.5
+        self.yScale = 2.5
     }
     
     func configure(gameScene: GameSceneProto) {
@@ -23,26 +25,23 @@ class Camera: SKCameraNode, Entity {
     }
 
     func setBackground(bounds: CGSize) {
-//        let bgX = -(bounds.width/2)
-//        let bgY = -(bounds.height/2)
-        let bg = SKSpriteNode(texture: SKTexture(imageNamed: "bkg"), size: CGSize(width: bounds.width, height: bounds.height))
-//        let bg = SKShapeNode(rect: CGRect(origin: CGPoint(x: bgX, y: bgY), size: bounds))
-//        bg.fillColor = Constants.BackgroundColor
-        
+        let bg = SKSpriteNode(texture: SKTexture(imageNamed: "night_bkg"), size: CGSize(width: bounds.width, height: bounds.height))
         self.addChild(bg)
     }
-    
+
     
     // MARK: Update
     func update(gameScene: GameSceneProto) {
         
         let legendPosition = gameScene.legend.position
         
-        let xOffset = CGFloat(170)
-        let yOffset = CGFloat(40)
+        // Offset from bottom left
+        let xOffset = CGFloat(470)
+        let yOffset = CGFloat(120)
         
         let newX: CGFloat = legendPosition.x + xOffset
         let newY: CGFloat = legendPosition.y + yOffset
+        
         
         self.position = CGPoint(x: newX, y: newY)
     }

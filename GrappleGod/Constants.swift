@@ -34,6 +34,8 @@ struct Constants {
     static let RoofSize: CGSize =  CGSize(width: 1000, height: 40)
     static let RoofHeight: CGFloat = CGFloat(400)
     static let Paralax_1: CGFloat = CGFloat(-0.2)
+    static let StartPlatformSize: CGSize = CGSize(width: 120*3, height: 27*3)
+    static let GrapplePadSize: CGSize = CGSize(width: 300*3, height: 50*3)
     
     // MARK: Colors
     static let BackgroundColor: UIColor = rgb(255, 233, 147)

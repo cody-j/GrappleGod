@@ -81,16 +81,7 @@ class Legend: SKSpriteNode, Entity {
             let action = SKAction.applyForce(Constants.LegendAcceleration, duration: 0.1)
             self.run(action)
         }
-        
-//        if self.isJumping {
-//            let action = SKAction.applyForce(Constants.JumpForce, duration: 0.1)
-//            self.run(action)
-//        }
-        
-//        if self.isGrappling {
-//            
-//        }
-        
+
     }
     
     required init?(coder aDecoder: NSCoder) {

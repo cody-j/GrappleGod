@@ -65,10 +65,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneProto {
         self.camera = cameraNode
         
         // Add Entities to root tree
-        
-        world.addChild(legend)
-        
         self.addChild(world)
+        self.addChild(legend)
     }
     
     
@@ -125,11 +123,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneProto {
     // MARK: Game State
     func gameOver() -> Bool {
         let yLimit = CGFloat(-2000)
+//        let xLimit = self.world.worldXlimit
         let legendY = self.legend.position.y
+        let legendX = self.legend.position.x
         
         if legendY < yLimit {
             return true
         }
+        
+//        if legendX > xLimit {
+//            return true
+//        }
         
         return false
     }
