@@ -48,9 +48,16 @@ class Grapple: SKSpriteNode, Entity {
     }
     
     func removeHook() {
-        scene!.physicsWorld.remove(rope)
-        self.physicsBody?.isDynamic = true
-        self.removeFromParent()
+        if let s = scene {
+            scene!.physicsWorld.remove(rope)
+            self.physicsBody?.isDynamic = true
+            self.removeFromParent()
+        } else {
+            fatalError("No fucking scene")
+        }
+        
+        
+        
     }
     
     
