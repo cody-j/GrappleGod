@@ -45,8 +45,13 @@ struct Constants {
     static let LegendSize: CGSize = CGSize(width: 17 * Constants.LegendScalar, height: 29 * Constants.LegendScalar)
     static let LegendStartPosition: CGPoint = CGPoint(x: 40, y: 180)
     static let LegendMaxSpeed: CGFloat = CGFloat(1200)
-    static let LegendAcceleration: CGVector = CGVector(dx: 300, dy: 0)
+    static let LegendAcceleration: CGVector = CGVector(dx: 100, dy: 0)
     static let LegendAccelerationDown: CGVector = CGVector(dx: 0, dy: -4000)
-    static let JumpForce: CGVector = CGVector(dx: 0, dy: 900)
+    static let JumpForce: CGVector = CGVector(dx: 0, dy: 100)
     static let LegendMass: CGFloat = 100
+    
+    // MARK: Grapple
+    static let GrappleSize: CGSize = CGSize(width: 23, height: 23)
+    static let ShootGrappleForce: CGVector = CGVector(dx: 20, dy: 40)
+    
 }

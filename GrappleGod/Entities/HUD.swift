@@ -10,9 +10,13 @@ import SpriteKit
 
 class HUD: SKNode, Entity {
 
-    
-    override init() {
+    var score: CGFloat = 0
+    var scoreText: String = ""
+    var screenSize: CGSize!
+
+    init(size: CGSize) {
         super.init()
+        self.screenSize = size
         
         let centerX: CGFloat = self.frame.width/2
         let centerY: CGFloat = self.frame.height/2
@@ -26,6 +30,21 @@ class HUD: SKNode, Entity {
         self.addChild(jumpButton)
         self.addChild(grappleButton)
         self.addChild(moveButton)
+        self.addChild(generateScoreLabel())
+    }
+    
+    func generateScoreLabel() -> SKLabelNode {
+        let score = SKLabelNode(text: scoreText)
+        
+        let W = self.screenSize.width
+        let H = self.screenSize.height
+        let x = W/2 - 130
+        let y = H/2 - 30
+        score.name = "score"
+        score.position = CGPoint(x: x, y: y)
+        score.fontColor = .black
+        score.fontSize = 20
+        return score
     }
     
     func generateButton(name: String, size: CGSize = CGSize(width: 80, height: 80), position: CGPoint) -> SKSpriteNode {
@@ -40,9 +59,14 @@ class HUD: SKNode, Entity {
     
     func update(gameScene: GameSceneProto) {
         
+        let calculatedScore = Int(floor(gameScene.legend.position.x/20))
+//        let calculatedY = Int(floor(gameScene.legend.position.y)) + 2000
+        if let labelNode = self.childNode(withName: "score") as? SKLabelNode {
+            labelNode.text = "\(calculatedScore)"
+        }
     }
-    
-    
+
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

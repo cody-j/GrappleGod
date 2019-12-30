@@ -15,6 +15,9 @@ class Legend: SKSpriteNode, Entity {
     var isJumping: Bool = false
     var isGrappling: Bool = false
     
+    // MARK: Child Nodes
+    var grapple: Grapple!
+    
     init() {
         super.init(texture: SKTexture(imageNamed: "Up"), color: .clear, size: Constants.LegendSize)
         
@@ -23,7 +26,7 @@ class Legend: SKSpriteNode, Entity {
         let pb = SKPhysicsBody(rectangleOf: size)
         pb.isDynamic = true
         pb.affectedByGravity = true
-        pb.density = 5
+//        pb.density = 5
         pb.restitution = 0
         pb.allowsRotation = false
         pb.friction = 0.6
@@ -31,6 +34,8 @@ class Legend: SKSpriteNode, Entity {
 
         self.physicsBody = pb
         self.name = "Legend"
+        
+        self.grapple = Grapple()
     }
     
     
@@ -45,24 +50,46 @@ class Legend: SKSpriteNode, Entity {
 
     func startJump() {
         self.isJumping = true
+        let action = SKAction.applyImpulse(Constants.JumpForce, duration: 0.1)
+        self.run(action)
     }
     
     func endJump() {
         self.isJumping = false
     }
     
+    func startGrapple() {
+        self.isGrappling = true
+        self.grapple.position = CGPoint(x: 20, y: 60)
+        self.addChild(self.grapple)
+        self.grapple.shoot()
+        print("starting: ", self.grapple.position)
+        
+    }
+    
+    func endGrapple() {
+        self.isGrappling = false
+        self.grapple.removeFromParent()
+        print("ending: ", self.grapple.position)
+    }
+    
     // MARK: Update
     func update(gameScene: GameSceneProto) {
-        // Move if moving
+        
         if self.isMoving {
             let action = SKAction.applyForce(Constants.LegendAcceleration, duration: 0.1)
             self.run(action)
         }
         
-        if self.isJumping {
-            let action = SKAction.applyForce(Constants.JumpForce, duration: 0.1)
-            self.run(action)
-        }
+//        if self.isJumping {
+//            let action = SKAction.applyForce(Constants.JumpForce, duration: 0.1)
+//            self.run(action)
+//        }
+        
+//        if self.isGrappling {
+//            
+//        }
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

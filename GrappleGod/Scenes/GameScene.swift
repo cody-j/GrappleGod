@@ -15,6 +15,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneProto {
     var legend: Legend!
     var world: World!
     var cameraNode: Camera!
+    var hud: HUD!
     
     // Mark: Game Configuration
     var settings: Settings!
@@ -38,28 +39,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneProto {
 
         // Query Realm for game state from Realm
         settings = GameData.sharedInstance.getSettings()
-        
-        // Init Entites
-        world = World()
-        legend = Legend()
-        
-        // Set up camera
-        cameraNode = Camera()
-        cameraNode.configure(gameScene: self)
 
     }
     
     override func didMove(to view: SKView) {
-
-        // Add Camera
+        // Init Entites
+        world = World()
+        legend = Legend()
+        
+        // Init/C camera
+        cameraNode = Camera()
+        cameraNode.configure(gameScene: self)
+        
+        // Init HUD
+        hud = HUD(size: self.view!.bounds.size)
+        
+        // Add HUD to camera tree
+        cameraNode.addChild(self.hud)
+        
+        // Add cameraNode to root tree
         self.addChild(cameraNode)
+        
+        // Reference cameraNode as scene camera
         self.camera = cameraNode
         
-        // Add HUD
-        let hud = HUD()
-        cameraNode.addChild(hud)
-        
-        // Add Entities
+        // Add Entities to root tree
         self.addChild(world)
         self.addChild(legend)
     }
@@ -79,7 +83,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneProto {
                     self.legend.startJump()
                     
                 case Constants.GrappleName:
-                    print("grappling")
+                    self.grappleTouch = touch
+                    self.legend.startGrapple()
                     
                 case Constants.MoveName:
                     self.moveTouch = touch
@@ -96,13 +101,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneProto {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             switch touch {
-            case self.moveTouch:
-                self.legend.endMove()
-                self.moveTouch = nil
-                
             case self.jumpTouch:
                 self.legend.endJump()
                 self.jumpTouch = nil
+            
+            case self.grappleTouch:
+                self.legend.endGrapple()
+                self.grappleTouch = nil
+                
+            case self.moveTouch:
+                self.legend.endMove()
+                self.moveTouch = nil
+            
             default:
                 print("do nothing")
             }
@@ -129,14 +139,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneProto {
     // MARK: Game Loop
     override func update(_ currentTime: TimeInterval) {
         legend.update(gameScene: self)
+    }
+    
+    override func didFinishUpdate() {
+        hud.update(gameScene: self)
+        cameraNode.update(gameScene: self)
         
         if gameOver() {
             restartGame()
         }
-    }
-    
-    override func didFinishUpdate() {
-        cameraNode.update(gameScene: self)
     }
     
     

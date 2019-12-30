@@ -20,7 +20,7 @@ class World: SKNode, Entity {
     
     
     func generateStart() {
-        let startSize = CGSize(width: 300, height: 40)
+        let startSize = CGSize(width: 3000, height: 40)
         let startNode = SKSpriteNode(texture: SKTexture(imageNamed: "start"), size: startSize)
         startNode.position = CGPoint(x: 0, y: -200)
 
@@ -56,7 +56,7 @@ class World: SKNode, Entity {
     
     
     func generateLevel() {
-        for i in 1...6 {
+        for i in 0...6 {
             let grapplePad = generateGrapplePad()
             let y = CGFloat(100)
             let x = CGFloat(i*400)
