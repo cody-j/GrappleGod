@@ -54,7 +54,6 @@ class Legend: SKSpriteNode, Entity {
     // MARK: Update
     func update(gameScene: GameSceneProto) {
         // Move if moving
-        print("posi", self.position)
         if self.isMoving {
             let action = SKAction.applyForce(Constants.LegendAcceleration, duration: 0.1)
             self.run(action)
