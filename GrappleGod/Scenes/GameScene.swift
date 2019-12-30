@@ -52,6 +52,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneProto {
         cameraNode.configure(gameScene: self)
         
         // Init HUD
+        print("size: ", self.view!.bounds.size)
         hud = HUD(size: self.view!.bounds.size)
         
         // Add HUD to camera tree

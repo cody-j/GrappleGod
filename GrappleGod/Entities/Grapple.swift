@@ -40,7 +40,7 @@ class Grapple: SKSpriteNode, Entity {
     func hook(roof: SKNode, legend: SKNode, world: SKNode, point: CGPoint) {
         self.physicsBody?.isDynamic = false
         
-        rope = SKPhysicsJointSpring.joint(withBodyA: roof.physicsBody!, bodyB: legend.physicsBody!, anchorA: point, anchorB: legend.convert(Constants.Origin, to: scene!))
+        rope = SKPhysicsJointSpring.joint(withBodyA: roof.physicsBody!, bodyB: legend.physicsBody!, anchorA: CGPoint(x: point.x - 11, y: point.y - 23), anchorB: legend.convert(Constants.Origin, to: scene!))
         self.scene!.physicsWorld.add(rope)
 
 //        rope.frequency = 4
@@ -49,7 +49,7 @@ class Grapple: SKSpriteNode, Entity {
     
     func removeHook() {
         if let s = scene {
-            scene!.physicsWorld.remove(rope)
+            scene?.physicsWorld.remove(rope)
             self.physicsBody?.isDynamic = true
             self.removeFromParent()
         } else {

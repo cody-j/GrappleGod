@@ -23,10 +23,11 @@ class Camera: SKCameraNode, Entity {
     }
 
     func setBackground(bounds: CGSize) {
-        let bgX = -(bounds.width/2)
-        let bgY = -(bounds.height/2)
-        let bg = SKShapeNode(rect: CGRect(origin: CGPoint(x: bgX, y: bgY), size: bounds))
-        bg.fillColor = Constants.BackgroundColor
+//        let bgX = -(bounds.width/2)
+//        let bgY = -(bounds.height/2)
+        let bg = SKSpriteNode(texture: SKTexture(imageNamed: "bkg"), size: CGSize(width: bounds.width, height: bounds.height))
+//        let bg = SKShapeNode(rect: CGRect(origin: CGPoint(x: bgX, y: bgY), size: bounds))
+//        bg.fillColor = Constants.BackgroundColor
         
         self.addChild(bg)
     }
