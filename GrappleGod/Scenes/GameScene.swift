@@ -151,6 +151,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneProto {
     }
     
     
+    // MARK: Physics Contact Delegate
+    func didBegin(_ contact: SKPhysicsContact) {
+        if contact.bodyB.node?.name == Constants.GrappleName {
+            print("start", self.legend.grapple.position)
+        }
+//        print(contact.bodyA.node?.name)
+//        print(contact.bodyB.node?.name)
+    }
+    
+    func didEnd(_ contact: SKPhysicsContact) {
+        if contact.bodyB.node?.name == Constants.GrappleName {
+            print("end", self.legend.grapple.position)
+        }
+    }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

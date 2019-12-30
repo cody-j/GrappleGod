@@ -20,20 +20,21 @@ class Legend: SKSpriteNode, Entity {
     
     init() {
         super.init(texture: SKTexture(imageNamed: "Up"), color: .clear, size: Constants.LegendSize)
-        
+        self.name = "legend"
         self.position = Constants.Origin
         
         let pb = SKPhysicsBody(rectangleOf: size)
         pb.isDynamic = true
         pb.affectedByGravity = true
-//        pb.density = 5
+        pb.density = 5
         pb.restitution = 0
         pb.allowsRotation = false
         pb.friction = 0.6
-        pb.collisionBitMask = Constants.LegendCat
-
+        pb.categoryBitMask = Constants.LegendCat
+        pb.collisionBitMask = Constants.GroundCat
+        pb.contactTestBitMask = 0
         self.physicsBody = pb
-        self.name = "Legend"
+        
         
         self.grapple = Grapple()
     }
@@ -60,17 +61,17 @@ class Legend: SKSpriteNode, Entity {
     
     func startGrapple() {
         self.isGrappling = true
-        self.grapple.position = CGPoint(x: 20, y: 60)
+        self.grapple.position = CGPoint(x: 3, y: 7)
         self.addChild(self.grapple)
         self.grapple.shoot()
-        print("starting: ", self.grapple.position)
+//        print("starting: ", self.grapple.position)
         
     }
     
     func endGrapple() {
         self.isGrappling = false
         self.grapple.removeFromParent()
-        print("ending: ", self.grapple.position)
+//        print("ending: ", self.grapple.position)
     }
     
     // MARK: Update

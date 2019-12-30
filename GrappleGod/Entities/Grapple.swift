@@ -13,15 +13,17 @@ class Grapple: SKSpriteNode, Entity {
     init() {
         let grappleSize = CGSize(width: 23, height: 23)
         super.init(texture: SKTexture(imageNamed: "grapple"), color: .clear, size: grappleSize)
-        
-        let pb = SKPhysicsBody(circleOfRadius: 9)
+        self.name = Constants.GrappleName
+        let pb = SKPhysicsBody(circleOfRadius: 6)
         pb.isDynamic = true
         pb.affectedByGravity = true
 //        pb.density = 30
-//        pb.restitution = 0
+        pb.restitution = 0
         pb.allowsRotation = false
-//        pb.friction = 0.6
-        pb.collisionBitMask = Constants.GrappleCat
+        pb.friction = 10
+        pb.categoryBitMask = Constants.GrappleCat
+        pb.collisionBitMask = Constants.RoofCat | Constants.GroundCat
+        pb.contactTestBitMask = Constants.RoofCat | Constants.GroundCat
         
         self.physicsBody = pb
     }
