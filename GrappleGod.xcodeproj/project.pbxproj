@@ -125,7 +125,6 @@
 				5353525D2395E14200E61DB7 /* Assets.xcassets */,
 				5353525F2395E14200E61DB7 /* LaunchScreen.storyboard */,
 				535352622395E14200E61DB7 /* Info.plist */,
-				53540AE223B59E4700197931 /* HUD.swift */,
 				531F644023B567C00083E2B0 /* GameData.swift */,
 			);
 			path = GrappleGod;
@@ -165,6 +164,7 @@
 				531F644223B572890083E2B0 /* Camera.swift */,
 				53540ADC23B5897400197931 /* Level.swift */,
 				53540ADE23B589A100197931 /* World.swift */,
+				53540AE223B59E4700197931 /* HUD.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";

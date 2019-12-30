@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class HUD: SKNode {
+class HUD: SKNode, Entity {
 
     
     override init() {
@@ -36,6 +36,12 @@ class HUD: SKNode {
         button.position = position
         return button
     }
+    
+    
+    func update(gameScene: GameSceneProto) {
+        
+    }
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

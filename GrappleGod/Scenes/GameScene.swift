@@ -55,8 +55,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneProto {
         self.addChild(cameraNode)
         self.camera = cameraNode
         
+        // Add HUD
         let hud = HUD()
         cameraNode.addChild(hud)
+        
         // Add Entities
         self.addChild(world)
         self.addChild(legend)
@@ -120,6 +122,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneProto {
     }
     
     func restartGame() {
+        self.legend.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
         self.legend.position = Constants.Origin
     }
     

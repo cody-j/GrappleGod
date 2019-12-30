@@ -14,13 +14,12 @@ class World: SKNode, Entity {
         super.init()
         
         self.generateStart()
-        
+        self.generateLevel()
     }
     
     
     
     func generateStart() {
-        
         let startSize = CGSize(width: 300, height: 40)
         let startNode = SKSpriteNode(texture: SKTexture(imageNamed: "start"), size: startSize)
         startNode.position = CGPoint(x: 0, y: -200)
@@ -36,6 +35,35 @@ class World: SKNode, Entity {
         startNode.physicsBody = pb
         
         self.addChild(startNode)
+    }
+    
+    
+    func generateGrapplePad() -> SKSpriteNode {
+        let size = CGSize(width: 220, height: 50)
+        
+        let node = SKSpriteNode(texture: SKTexture(imageNamed: "start"), size: size)
+        
+        let pb = SKPhysicsBody(texture: node.texture!, size: size)
+        pb.affectedByGravity = false
+        pb.allowsRotation = false
+        pb.isDynamic = false
+        pb.categoryBitMask = Constants.GrappleCat
+        
+        node.physicsBody = pb
+        
+        return node
+    }
+    
+    
+    func generateLevel() {
+        for i in 1...6 {
+            let grapplePad = generateGrapplePad()
+            let y = CGFloat(100)
+            let x = CGFloat(i*400)
+        
+            grapplePad.position = CGPoint(x: x, y: y)
+            self.addChild(grapplePad)
+        }
     }
     
     func update(gameScene: GameSceneProto) {}
