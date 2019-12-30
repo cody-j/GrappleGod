@@ -47,6 +47,6 @@ struct Constants {
     static let LegendMaxSpeed: CGFloat = CGFloat(1200)
     static let LegendAcceleration: CGVector = CGVector(dx: 300, dy: 0)
     static let LegendAccelerationDown: CGVector = CGVector(dx: 0, dy: -4000)
-    static let JumpForce: CGVector = CGVector(dx: 0, dy: 16000)
+    static let JumpForce: CGVector = CGVector(dx: 0, dy: 900)
     static let LegendMass: CGFloat = 100
 }

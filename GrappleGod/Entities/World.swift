@@ -20,11 +20,12 @@ class World: SKNode, Entity {
     
     
     func generateStart() {
+        
+        let startSize = CGSize(width: 300, height: 40)
+        let startNode = SKSpriteNode(texture: SKTexture(imageNamed: "start"), size: startSize)
+        startNode.position = CGPoint(x: 0, y: -200)
 
-        let startNode = SKSpriteNode(texture: SKTexture(imageNamed: "PlainHorizontal"), size: CGSize(width: 1400, height: 20))
-        startNode.position = CGPoint(x: -100, y: -200)
-
-        let pb = SKPhysicsBody(texture: startNode.texture!, size: CGSize(width: 1400, height: 20))
+        let pb = SKPhysicsBody(texture: startNode.texture!, size: startSize)
         pb.affectedByGravity = false
         pb.allowsRotation = false
         pb.restitution = 0.2

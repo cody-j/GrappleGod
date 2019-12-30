@@ -22,6 +22,7 @@ class HUD: SKNode {
         let grappleButton = generateButton(name: Constants.GrappleName, position: CGPoint(x: centerX + 280, y: centerY - 40))
         
         self.name = "HUD"
+        self.zPosition = 100
         self.addChild(jumpButton)
         self.addChild(grappleButton)
         self.addChild(moveButton)

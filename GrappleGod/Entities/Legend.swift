@@ -10,6 +10,11 @@ import SpriteKit
 
 class Legend: SKSpriteNode, Entity {
     
+    // MARK: Legend State
+    var isMoving: Bool = false
+    var isJumping: Bool = false
+    var isGrappling: Bool = false
+    
     init() {
         super.init(texture: SKTexture(imageNamed: "Up"), color: .clear, size: Constants.LegendSize)
         
@@ -29,9 +34,36 @@ class Legend: SKSpriteNode, Entity {
     }
     
     
+    // MARK: Actions
+    func startMove() {
+        self.isMoving = true
+    }
+    
+    func endMove() {
+        self.isMoving = false
+    }
+
+    func startJump() {
+        self.isJumping = true
+    }
+    
+    func endJump() {
+        self.isJumping = false
+    }
+    
     // MARK: Update
     func update(gameScene: GameSceneProto) {
-        print("hello")
+        // Move if moving
+        print("posi", self.position)
+        if self.isMoving {
+            let action = SKAction.applyForce(Constants.LegendAcceleration, duration: 0.1)
+            self.run(action)
+        }
+        
+        if self.isJumping {
+            let action = SKAction.applyForce(Constants.JumpForce, duration: 0.1)
+            self.run(action)
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

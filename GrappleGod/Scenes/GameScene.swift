@@ -23,7 +23,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneProto {
     var score: Int = 0
     var playerSpeed: CGFloat = 0
 
-//    var powerup: Powerup
+    // MARK: Touches
+    var moveTouch: UITouch?
+    var jumpTouch: UITouch?
+    var grappleTouch: UITouch?
     
     override init(size: CGSize) {
 
@@ -70,11 +73,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneProto {
             for node in touched! {
                 switch node.name {
                 case Constants.JumpName:
-                    print("jumping")
+                    self.jumpTouch = touch
+                    self.legend.startJump()
+                    
                 case Constants.GrappleName:
                     print("grappling")
+                    
                 case Constants.MoveName:
-                    print("moving")
+                    self.moveTouch = touch
+                    self.legend.startMove()
+                    
                 default:
                     print("hud element not registered")
                 }
@@ -85,13 +93,43 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneProto {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
-            
+            switch touch {
+            case self.moveTouch:
+                self.legend.endMove()
+                self.moveTouch = nil
+                
+            case self.jumpTouch:
+                self.legend.endJump()
+                self.jumpTouch = nil
+            default:
+                print("do nothing")
+            }
         }
+    }
+    
+    // MARK: Game State
+    func gameOver() -> Bool {
+        let yLimit = CGFloat(-2000)
+        let legendY = self.legend.position.y
+        
+        if legendY < yLimit {
+            return true
+        }
+        
+        return false
+    }
+    
+    func restartGame() {
+        self.legend.position = Constants.Origin
     }
     
     // MARK: Game Loop
     override func update(_ currentTime: TimeInterval) {
-//        legend.update(gameScene: self)
+        legend.update(gameScene: self)
+        
+        if gameOver() {
+            restartGame()
+        }
     }
     
     override func didFinishUpdate() {
