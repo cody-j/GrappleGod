@@ -11,5 +11,8 @@ import SpriteKit
 protocol GameSceneProto: SKScene {
     
     var legend: Legend! { get }
+    var world: World! { get }
+    var grappleHook: GrappleHook! { get set }
+    var grappleGun: GrappleGun! { get set }
     
 }

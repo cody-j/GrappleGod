@@ -51,7 +51,8 @@ class World: SKNode, Entity {
         
         let node = SKSpriteNode(texture: SKTexture(imageNamed: "grapple_pad"), size: size)
         node.name = "roof"
-        let pb = SKPhysicsBody(texture: node.texture!, size: size)
+//        let pb = SKPhysicsBody(texture: node.texture!, size: size)
+        let pb = SKPhysicsBody(rectangleOf: size)
         pb.affectedByGravity = false
         pb.allowsRotation = false
         pb.isDynamic = false
@@ -69,17 +70,27 @@ class World: SKNode, Entity {
     
     
     func generateLevel() {
-        for i in 0...6 {
-            let yPosition = CGFloat(500)
-            let padSpacing = CGFloat(600)
+        
+        let yStart = CGFloat(500)
+        var yCurrent: CGFloat = yStart
+        for i in 0...40 {
+//            let yPosition = CGFloat(500)
+            let padSpacing = CGFloat(0)
             let padDelta = Constants.GrapplePadSize.width + padSpacing
             
             let grapplePad = generateGrapplePad()
             let x = CGFloat(CGFloat(i) * padDelta)
         
-            grapplePad.position = CGPoint(x: x, y: yPosition)
-            self.addChild(grapplePad)
+            yCurrent += -280*3
+            print(yCurrent)
+//            self.addChild(grapplePad)
+            let worldBlock = WorldBlock(blockType: "down", x: x, y: yCurrent)
+            self.addChild(worldBlock)
+            
         }
+        
+//        let worldBlock = WorldBlock(blockType: "straight", yStart: 200)
+//        self.addChild(worldBlock)
     }
     
     func update(gameScene: GameSceneProto) {

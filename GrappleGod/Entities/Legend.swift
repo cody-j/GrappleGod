@@ -14,9 +14,11 @@ class Legend: SKSpriteNode, Entity {
     var isMoving: Bool = false
     var isJumping: Bool = false
     var isGrappling: Bool = false
-    
+
+    var ropeJoint: SKPhysicsJointSpring!
     // MARK: Child Nodes
-    var grapple: Grapple!
+//    var grappleGun: GrappleGun!
+//    var grapple: Grapple!
     
     init() {
         super.init(texture: SKTexture(imageNamed: "Up"), color: .clear, size: Constants.LegendSize)
@@ -37,11 +39,81 @@ class Legend: SKSpriteNode, Entity {
         self.physicsBody = pb
         
         
-        self.grapple = Grapple()
+//        self.grapple = Grapple()
+//        self.grappleGun = GrappleGun()
+//        self.addChild(self.grappleGun)
+//        self.giveGun()
     }
     
+    func swing(_ node: SKNode, _ contactPoint: CGPoint) {
+        // remove existing joint before shooting new one
+        print("swinging")
+        
+        guard let s = self.scene as? GameScene else {
+            fatalError("No scene when attempting to grapple")
+        }
+        
+        if let j = self.ropeJoint {
+            s.physicsWorld.remove(j)
+        }
+        
+        let newJoint = SKPhysicsJointSpring.joint(
+            withBodyA: self.physicsBody!,
+            bodyB: node.physicsBody!,
+//            anchorA: self.position,
+            anchorA: s.grappleGun.position,
+            anchorB: contactPoint
+        )
+        
+        self.ropeJoint = newJoint
+        s.physicsWorld.add(newJoint)
+        
+    }
+    
+    func stopGrapple() {
+        guard let s = self.scene as? GameScene else {
+             fatalError("No scene when attempting to remove grapple")
+         }
+        if let j = self.ropeJoint {
+            s.physicsWorld.remove(j)
+        }
+        if let gh = s.grappleHook {
+            gh.removeFromParent()
+        }
+    }
+//    func giveGun() {
+        
+//        let joint = SKPhysicsJointPin.joint(withBodyA: self.physicsBody!, bodyB: self.grappleGun.physicsBody!, anchor: Constants.Origin)
+//        self.scene?.physicsWorld.add(joint)
+//
+        
+//    }
     
     // MARK: Actions
+    func move(_ direction: Int = 1) {
+        let moveForce = Constants.LegendAcceleration.dx
+        let withDirection = moveForce * CGFloat(direction)
+        let action = SKAction.applyForce(CGVector(dx: withDirection, dy: 0), duration: 0.1)
+        self.run(action)
+    }
+    
+    func jump() {
+        let action = SKAction.applyImpulse(Constants.JumpForce, duration: 0.1)
+        self.run(action)
+    }
+    
+    func grapple() {
+//        self.grappleGun.shoot()
+    }
+    
+    func releaseGrapple() {
+//        self.grappleGun.grapple.grappleCleanUp()
+        // remove grapple from scene
+        // reset position
+        // clean up joint
+    }
+    
+    // MARK: Touch Handlers
     func startMove() {
         self.isMoving = true
     }
@@ -52,8 +124,7 @@ class Legend: SKSpriteNode, Entity {
 
     func startJump() {
         self.isJumping = true
-        let action = SKAction.applyImpulse(Constants.JumpForce, duration: 0.1)
-        self.run(action)
+        self.jump()
     }
     
     func endJump() {
@@ -62,24 +133,28 @@ class Legend: SKSpriteNode, Entity {
     
     func startGrapple() {
         self.isGrappling = true
-        self.grapple.position = CGPoint(x: 3, y: 7)
-        self.addChild(self.grapple)
-        self.grapple.shoot()
+        guard let s = self.scene as? GameScene else {
+            fatalError("Couldn't find scene starting grapple")
+        }
+        s.grappleGun.shoot()
+//        self.grapple(contactNode, contactPoint)
+//        self.grapple.position = CGPoint(x: 3, y: 7)
+//        self.addChild(self.grapple)
+//        self.grapple.shoot()
 //        print("starting: ", self.grapple.position)
         
     }
     
     func endGrapple() {
         self.isGrappling = false
-        self.grapple.removeHook()
+        self.stopGrapple()
     }
     
     // MARK: Update
     func update(gameScene: GameSceneProto) {
         
         if self.isMoving {
-            let action = SKAction.applyForce(Constants.LegendAcceleration, duration: 0.1)
-            self.run(action)
+            self.move()
         }
 
     }

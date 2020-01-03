@@ -13,11 +13,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneProto {
     
     // MARK: Entities
     var legend: Legend!
+    var grappleHook: GrappleHook!
+    var grappleGun: GrappleGun!
+    
     var world: World!
     var cameraNode: Camera!
     var hud: HUD!
     
-    // Mark: Game Configuration
+    // Settings
     var settings: Settings!
     
     // MARK: Game State
@@ -38,21 +41,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneProto {
         self.anchorPoint = CGPoint(x: 0, y: 0)
 
         // Query Realm for game state from Realm
-        settings = GameData.sharedInstance.getSettings()
+//        settings = GameData.sharedInstance.getSettings()
 
     }
     
+    // MARK: Scene Setup
     override func didMove(to view: SKView) {
         // Init Entites
         world = World()
         legend = Legend()
+        grappleGun = GrappleGun(holsterTo: legend)
+        grappleHook = GrappleHook()
+        
+//        let worldBlock = WorldBlock(blockType: "straight", yStart: 200)
         
         // Init/C camera
         cameraNode = Camera()
         cameraNode.configure(gameScene: self)
         
         // Init HUD
-        print("size: ", self.view!.bounds.size)
         hud = HUD(size: self.view!.bounds.size)
         
         // Add HUD to camera tree
@@ -67,6 +74,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneProto {
         // Add Entities to root tree
         self.addChild(world)
         self.addChild(legend)
+        self.addChild(grappleGun)
+
     }
     
     
@@ -168,13 +177,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneProto {
         let B = contact.bodyB.node!
         let isGrapple = B.name == Constants.GrappleName
         let isRoof = A.name == "roof"
-        
+
         if isGrapple && isRoof {
-            print(contact.contactPoint)
-            print(self.legend.grapple.position)
-            print("A", A.position)
-            print("B", B.position)
-            self.legend.grapple.hook(roof: contact.bodyA.node!, legend: self.legend, world: self.world, point: contact.contactPoint)
+            self.legend.swing(A, contact.contactPoint)
+//            self.legend.grappleGun.grapple.grappleHit(contact.contactPoint, A.physicsBody!)
+//            print(contact.contactPoint)
+//            print(self.legend.grapple.position)
+//            print("A", A.position)
+//            print("B", B.position)
+//            self.legend.grapple.hook(roof: contact.bodyA.node!, legend: self.legend, world: self.world, point: contact.contactPoint)
         }
 
     }
