@@ -36,6 +36,21 @@ struct Constants {
     static let Paralax_1: CGFloat = CGFloat(-0.2)
     static let StartPlatformSize: CGSize = CGSize(width: 120*3, height: 27*3)
     static let GrapplePadSize: CGSize = CGSize(width: 300*3, height: 50*3)
+    static let DownPadSize: CGSize = CGSize(width: 300*3, height: 300*3)
+    static let WorldBlocks: [String: Any] = [
+        "straight": [
+            "sprite":"grapple_pad",
+            "size": Constants.GrapplePadSize,
+            "yStart": 0,
+            "yDelta": CGFloat(0)
+        ],
+        "down": [
+            "sprite":"down_pad",
+            "size": CGSize(width: 300*3, height: 300*3),
+            "yStart": CGFloat(280),
+            "yDelta": CGFloat(-280)
+        ]
+    ]
     
     // MARK: Colors
     static let BackgroundColor: UIColor = rgb(255, 233, 147)
