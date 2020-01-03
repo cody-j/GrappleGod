@@ -24,7 +24,10 @@
 		53540ADF23B589A100197931 /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53540ADE23B589A100197931 /* World.swift */; };
 		53540AE123B592D000197931 /* MainMenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53540AE023B592D000197931 /* MainMenuScene.swift */; };
 		53540AE323B59E4700197931 /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53540AE223B59E4700197931 /* HUD.swift */; };
-		5365F58E23B9A9BE00BDF451 /* Grapple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5365F58D23B9A9BE00BDF451 /* Grapple.swift */; };
+		5365F58E23B9A9BE00BDF451 /* GrappleHook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5365F58D23B9A9BE00BDF451 /* GrappleHook.swift */; };
+		5365F59223BBEAC800BDF451 /* GrappleGun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5365F59123BBEAC800BDF451 /* GrappleGun.swift */; };
+		53C3C7C123BF2695006743E0 /* WorldBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C3C7C023BF2695006743E0 /* WorldBlock.swift */; };
+		53C3C7C323BF26CB006743E0 /* _Blocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C3C7C223BF26CB006743E0 /* _Blocks.swift */; };
 		7205F99BB2738EFF635DCD26 /* Pods_GrappleGod.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB6D1F3B45BB56A27FC75771 /* Pods_GrappleGod.framework */; };
 /* End PBXBuildFile section */
 
@@ -61,7 +64,10 @@
 		53540ADE23B589A100197931 /* World.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = World.swift; sourceTree = "<group>"; };
 		53540AE023B592D000197931 /* MainMenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuScene.swift; sourceTree = "<group>"; };
 		53540AE223B59E4700197931 /* HUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
-		5365F58D23B9A9BE00BDF451 /* Grapple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grapple.swift; sourceTree = "<group>"; };
+		5365F58D23B9A9BE00BDF451 /* GrappleHook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrappleHook.swift; sourceTree = "<group>"; };
+		5365F59123BBEAC800BDF451 /* GrappleGun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrappleGun.swift; sourceTree = "<group>"; };
+		53C3C7C023BF2695006743E0 /* WorldBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldBlock.swift; sourceTree = "<group>"; };
+		53C3C7C223BF26CB006743E0 /* _Blocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _Blocks.swift; sourceTree = "<group>"; };
 		85CA6E7839A9BAC8FCA60B04 /* Pods-GrappleGod.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GrappleGod.debug.xcconfig"; path = "Target Support Files/Pods-GrappleGod/Pods-GrappleGod.debug.xcconfig"; sourceTree = "<group>"; };
 		DB6D1F3B45BB56A27FC75771 /* Pods_GrappleGod.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GrappleGod.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -162,12 +168,15 @@
 		5353527C239774AE00E61DB7 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				5353527D239774B700E61DB7 /* Legend.swift */,
 				531F644223B572890083E2B0 /* Camera.swift */,
+				5365F59123BBEAC800BDF451 /* GrappleGun.swift */,
+				5365F58D23B9A9BE00BDF451 /* GrappleHook.swift */,
+				53540AE223B59E4700197931 /* HUD.swift */,
+				5353527D239774B700E61DB7 /* Legend.swift */,
 				53540ADC23B5897400197931 /* Level.swift */,
 				53540ADE23B589A100197931 /* World.swift */,
-				53540AE223B59E4700197931 /* HUD.swift */,
-				5365F58D23B9A9BE00BDF451 /* Grapple.swift */,
+				53C3C7C023BF2695006743E0 /* WorldBlock.swift */,
+				53C3C7C223BF26CB006743E0 /* _Blocks.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -335,10 +344,13 @@
 				53540AE323B59E4700197931 /* HUD.swift in Sources */,
 				531F644123B567C00083E2B0 /* GameData.swift in Sources */,
 				53540ADF23B589A100197931 /* World.swift in Sources */,
+				53C3C7C323BF26CB006743E0 /* _Blocks.swift in Sources */,
 				535352512395E13F00E61DB7 /* AppDelegate.swift in Sources */,
 				53540ADD23B5897500197931 /* Level.swift in Sources */,
 				535352802397781500E61DB7 /* Constants.swift in Sources */,
-				5365F58E23B9A9BE00BDF451 /* Grapple.swift in Sources */,
+				5365F59223BBEAC800BDF451 /* GrappleGun.swift in Sources */,
+				53C3C7C123BF2695006743E0 /* WorldBlock.swift in Sources */,
+				5365F58E23B9A9BE00BDF451 /* GrappleHook.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
