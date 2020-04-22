@@ -84,7 +84,7 @@ class World: SKNode, Entity {
             yCurrent += -280*3
             print(yCurrent)
 //            self.addChild(grapplePad)
-            let worldBlock = WorldBlock(blockType: "down", x: x, y: yCurrent)
+            let worldBlock = WorldBlock(blockType: "straight", x: x, y: yCurrent)
             self.addChild(worldBlock)
             
         }

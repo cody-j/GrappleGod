@@ -19,8 +19,8 @@ class GameViewController: UIViewController {
         
         if let view = self.view as! SKView? {
             let scene = GameScene(size: view.bounds.size)
-//            let scene = MainMenuScene(size: view.bounds.size)
-            
+            // let scene = MainMenuScene(size: view.bounds.size)
+
             view.showsFPS = true
             view.showsPhysics = true
             view.presentScene(scene)

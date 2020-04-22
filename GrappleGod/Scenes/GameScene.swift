@@ -41,7 +41,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneProto {
         self.anchorPoint = CGPoint(x: 0, y: 0)
 
         // Query Realm for game state from Realm
-//        settings = GameData.sharedInstance.getSettings()
+        // settings = GameData.sharedInstance.getSettings()
 
     }
     
@@ -53,7 +53,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneProto {
         grappleGun = GrappleGun(holsterTo: legend)
         grappleHook = GrappleHook()
         
-//        let worldBlock = WorldBlock(blockType: "straight", yStart: 200)
+        // let worldBlock = WorldBlock(blockType: "straight", yStart: 200)
         
         // Init/C camera
         cameraNode = Camera()
@@ -131,10 +131,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneProto {
     
     // MARK: Game State
     func gameOver() -> Bool {
-        let yLimit = CGFloat(-2000)
+        let yLimit = CGFloat(-4000)
 //        let xLimit = self.world.worldXlimit
         let legendY = self.legend.position.y
-        let legendX = self.legend.position.x
+//        let legendX = self.legend.position.x
         
         if legendY < yLimit {
             return true
