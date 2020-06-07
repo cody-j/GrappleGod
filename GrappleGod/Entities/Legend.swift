@@ -12,6 +12,7 @@ class Legend: SKSpriteNode, Entity {
     
     // MARK: Legend State
     var isMoving: Bool = false
+    var direction: Int = 1
     var isJumping: Bool = false
     var isGrappling: Bool = false
 
@@ -90,9 +91,9 @@ class Legend: SKSpriteNode, Entity {
 //    }
     
     // MARK: Actions
-    func move(_ direction: Int = 1) {
+    func move() {
         let moveForce = Constants.LegendAcceleration.dx
-        let withDirection = moveForce * CGFloat(direction)
+        let withDirection = moveForce * CGFloat(self.direction)
         let action = SKAction.applyForce(CGVector(dx: withDirection, dy: 0), duration: 0.1)
         self.run(action)
     }
@@ -114,11 +115,15 @@ class Legend: SKSpriteNode, Entity {
     }
     
     // MARK: Touch Handlers
-    func startMove() {
+    func startMove(backwards: Bool = false) {
+        if (backwards) {
+            self.direction = -1
+        }
         self.isMoving = true
     }
     
     func endMove() {
+        self.direction = 1
         self.isMoving = false
     }
 
@@ -131,12 +136,12 @@ class Legend: SKSpriteNode, Entity {
         self.isJumping = false
     }
     
-    func startGrapple() {
+    func startGrapple(backwards: Bool = false) {
         self.isGrappling = true
         guard let s = self.scene as? GameScene else {
             fatalError("Couldn't find scene starting grapple")
         }
-        s.grappleGun.shoot()
+        s.grappleGun.shoot(backwards)
 //        self.grapple(contactNode, contactPoint)
 //        self.grapple.position = CGPoint(x: 3, y: 7)
 //        self.addChild(self.grapple)

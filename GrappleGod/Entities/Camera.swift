@@ -25,7 +25,8 @@ class Camera: SKCameraNode, Entity {
     }
 
     func setBackground(bounds: CGSize) {
-        let bg = SKSpriteNode(texture: SKTexture(imageNamed: "night_bkg"), size: CGSize(width: bounds.height, height: bounds.width))
+        print("bounds", bounds)
+        let bg = SKSpriteNode(texture: SKTexture(imageNamed: "night_bkg"), size: CGSize(width: bounds.width, height: bounds.height))
         self.addChild(bg)
     }
 

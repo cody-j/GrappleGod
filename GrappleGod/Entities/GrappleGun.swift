@@ -37,7 +37,7 @@ class GrappleGun: SKSpriteNode, Entity {
 //        )
     }
 
-    func shoot() {
+    func shoot(_ backwards: Bool = false) {
         guard let s = self.scene as? GameScene else {
             fatalError("Couldn't get scene shooting")
         }
@@ -45,7 +45,8 @@ class GrappleGun: SKSpriteNode, Entity {
         s.grappleHook = GrappleHook()
         s.grappleHook.position = self.position
         s.addChild(s.grappleHook)
-        s.grappleHook.shoot()
+        let direction = backwards ? Constants.ShootGrappleForceBackwards : Constants.ShootGrappleForce
+        s.grappleHook.shoot(direction)
     }
 
     func update(gameScene: GameSceneProto) {

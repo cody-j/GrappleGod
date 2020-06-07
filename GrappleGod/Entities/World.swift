@@ -81,7 +81,7 @@ class World: SKNode, Entity {
             let grapplePad = generateGrapplePad()
             let x = CGFloat(CGFloat(i) * padDelta)
         
-            yCurrent += -280*3
+            yCurrent += 0 //-280*3
             print(yCurrent)
 //            self.addChild(grapplePad)
             let worldBlock = WorldBlock(blockType: "straight", x: x, y: yCurrent)

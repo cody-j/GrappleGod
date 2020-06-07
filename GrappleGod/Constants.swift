@@ -20,7 +20,9 @@ struct Constants {
     // MARK: Button Names
     static let JumpName: String = "jump"
     static let GrappleName: String = "grapple"
+    static let GrappleBackName: String = "grappleBack"
     static let MoveName: String = "move"
+    static let MoveBackName: String = "moveBack"
     static let HomeName: String = "home"
     static let ActionButtonName: String = "ActionButton"
     // MARK: Category Masks
@@ -70,5 +72,6 @@ struct Constants {
     // MARK: Grapple
     static let GrappleSize: CGSize = CGSize(width: 23, height: 23)
     static let ShootGrappleForce: CGVector = CGVector(dx: 20, dy: 40)
+    static let ShootGrappleForceBackwards: CGVector = CGVector(dx: -20, dy: 40)
     
 }

@@ -93,13 +93,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneProto {
                     self.legend.startJump()
                     
                 case Constants.GrappleName:
+                    if (self.grappleTouch != nil) {
+                        return
+                    }
                     self.grappleTouch = touch
                     self.legend.startGrapple()
+                
+                case Constants.GrappleBackName:
+                    if (self.grappleTouch != nil) {
+                        return
+                    }
+                    self.grappleTouch = touch
+                    self.legend.startGrapple(backwards: true)
                     
                 case Constants.MoveName:
+                    if (self.moveTouch != nil) {
+                        return
+                    }
                     self.moveTouch = touch
                     self.legend.startMove()
-                    
+
+                case Constants.MoveBackName:
+                    if (self.moveTouch != nil) {
+                        return
+                    }
+                    self.moveTouch = touch
+                    self.legend.startMove(backwards: true)
+
                 default:
                     print("hud element not registered")
                 }

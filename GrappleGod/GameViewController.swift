@@ -18,8 +18,8 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         
         if let view = self.view as! SKView? {
-            let scene = GameScene(size: view.bounds.size)
-            // let scene = MainMenuScene(size: view.bounds.size)
+//            let scene = GameScene(size: view.bounds.size)
+            let scene = MainMenuScene(size: view.bounds.size)
 
             view.showsFPS = true
             view.showsPhysics = true
@@ -41,6 +41,6 @@ class GameViewController: UIViewController {
     }
 
     override var prefersStatusBarHidden: Bool {
-        return true
+        return false
     }
 }

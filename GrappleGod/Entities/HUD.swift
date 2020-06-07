@@ -21,15 +21,20 @@ class HUD: SKNode, Entity {
         let centerX: CGFloat = self.frame.width/2
         let centerY: CGFloat = self.frame.height/2
 
-        let moveButton = generateButton(name: Constants.MoveName, size: CGSize(width: 120, height: 120), position: CGPoint(x: centerX - 260, y: centerY - 120))
+        let moveBackButton = generateButton(name: Constants.MoveBackName, size: CGSize(width: 80, height: 80), position: CGPoint(x: centerX - 300, y: centerY - 80))
+        let moveButton = generateButton(name: Constants.MoveName, size: CGSize(width: 80, height: 80), position: CGPoint(x: centerX - 200, y: centerY - 150))
+        
         let jumpButton = generateButton(name: Constants.JumpName, position: CGPoint(x: centerX + 190, y: centerY - 140))
-        let grappleButton = generateButton(name: Constants.GrappleName, position: CGPoint(x: centerX + 280, y: centerY - 40))
+        let grappleButton = generateButton(name: Constants.GrappleName, position: CGPoint(x: centerX + 280, y: centerY - 80))
+        let grappleBackButton = generateButton(name: Constants.GrappleBackName, position: CGPoint(x: centerX + 190, y: centerY - 30))
         
         self.name = "HUD"
         self.zPosition = 100
         self.addChild(jumpButton)
         self.addChild(grappleButton)
+        self.addChild(grappleBackButton)
         self.addChild(moveButton)
+        self.addChild(moveBackButton)
         self.addChild(generateScoreLabel())
     }
     
