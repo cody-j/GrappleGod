@@ -118,12 +118,13 @@ class Legend: SKSpriteNode, Entity {
     func startMove(backwards: Bool = false) {
         if (backwards) {
             self.direction = -1
+        } else {
+            self.direction = 1
         }
         self.isMoving = true
     }
     
     func endMove() {
-        self.direction = 1
         self.isMoving = false
     }
 
@@ -157,7 +158,17 @@ class Legend: SKSpriteNode, Entity {
     
     // MARK: Update
     func update(gameScene: GameSceneProto) {
+        guard let xVelo = self.physicsBody?.velocity.dx else {
+            return
+        }
         
+        if (self.direction < 0) {
+            self.xScale = -1
+        } else {
+            self.xScale = 1;
+
+            print("backwards")
+        }
         if self.isMoving {
             self.move()
         }
