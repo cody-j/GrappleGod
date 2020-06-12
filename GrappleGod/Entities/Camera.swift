@@ -38,11 +38,11 @@ class Camera: SKCameraNode, Entity {
         
         
         // Offset from bottom left
-        let xOffset = CGFloat(420)
+        let xOffset = CGFloat(300)
         let yOffset = CGFloat(120)
         
         let newX: CGFloat = legendPosition.x + xOffset
-        let newY: CGFloat = legendPosition.y + yOffset
+        let newY: CGFloat = 0 // yOffset // + legendPosition.y
         
         
         self.position = CGPoint(x: newX, y: newY)

@@ -12,7 +12,7 @@ class Legend: SKSpriteNode, Entity {
     
     // MARK: Legend State
     var isMoving: Bool = false
-    var direction: Int = 1
+    var direction: CGFloat = 1
     var isJumping: Bool = false
     var isGrappling: Bool = false
     var jumpNumber: Int = 0
@@ -22,7 +22,7 @@ class Legend: SKSpriteNode, Entity {
 //    var grapple: Grapple!
     
     init() {
-        super.init(texture: SKTexture(imageNamed: "Up"), color: .clear, size: Constants.LegendSize)
+        super.init(texture: SKTexture(imageNamed: "falling"), color: .clear, size: Constants.LegendSize)
         self.name = "legend"
         self.position = Constants.Origin
         
@@ -33,6 +33,7 @@ class Legend: SKSpriteNode, Entity {
         pb.restitution = 0
         pb.allowsRotation = false
         pb.friction = 0.6
+        pb.mass = Constants.LegendMass
         pb.categoryBitMask = Constants.LegendCat
         pb.collisionBitMask = Constants.GroundCat
         pb.contactTestBitMask = 0
@@ -82,6 +83,7 @@ class Legend: SKSpriteNode, Entity {
         let withDirection = moveForce * CGFloat(self.direction)
         let action = SKAction.applyForce(CGVector(dx: withDirection, dy: 0), duration: 0.1)
         self.run(action)
+//        self.physicsBody?.velocity.dx = Constants.MaxVelocity * self.direction
     }
     
     func slowDown() {
@@ -118,7 +120,12 @@ class Legend: SKSpriteNode, Entity {
         if (self.jumpNumber > 1) {
             return
         }
-        self.physicsBody?.velocity.dy = 0
+        guard let yVelo = self.physicsBody?.velocity.dy else {
+            return
+        }
+        if (yVelo < CGFloat(0)) {
+            self.physicsBody?.velocity.dy = 0
+        }
         let force = getJumpForce()
         let action = SKAction.applyImpulse(force, duration: 0.1)
         self.run(action)
@@ -170,6 +177,9 @@ class Legend: SKSpriteNode, Entity {
     
     
     func clampVelo () -> Void {
+        if (self.isGrappling) {
+            return
+        }
         let maxVelo = Constants.MaxVelocity
         
         guard let xVelo = self.physicsBody?.velocity.dx else {
@@ -189,11 +199,11 @@ class Legend: SKSpriteNode, Entity {
             newXVelo = -maxVelo
         }
         
-        if (yVelo > maxVelo) {
-            newYVelo = maxVelo
-        } else if (yVelo < -maxVelo) {
-            newYVelo = -maxVelo
-        }
+//        if (yVelo > maxVelo) {
+//            newYVelo = maxVelo
+//        } else if (yVelo < -maxVelo) {
+//            newYVelo = -maxVelo
+//        }
         
         
         self.physicsBody?.velocity = CGVector(dx: newXVelo, dy: newYVelo)
@@ -231,14 +241,11 @@ class Legend: SKSpriteNode, Entity {
         self.clampVelo()
         
         if (yVelo > 0) {
-//            self.texture = SKTexture(imageNamed: "Jump")
-        } else if (yVelo == 0 && xVelo == 0) {
-            // static up down
-//            let textures = [SKTexture(imageNamed: "Up"), SKTexture(imageNamed: "Down")]
-//            let staticAnimation = SKAction.animate(with: textures, timePerFrame: 0.3)
-//            self.run(staticAnimation)
+            self.texture = SKTexture(imageNamed: "jumping")
+        } else if (yVelo < 0) {
+            self.texture = SKTexture(imageNamed: "falling")
         } else {
-//            self.texture = SKTexture(imageNamed: "Up")
+            self.texture = SKTexture(imageNamed: "Up")
         }
         
         if (self.direction < 0) {
