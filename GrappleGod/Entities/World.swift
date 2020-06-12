@@ -34,7 +34,7 @@ class World: SKNode, Entity {
         pb.affectedByGravity = false
         pb.allowsRotation = false
         pb.restitution = 0
-        pb.friction = 0.6
+        pb.friction = 0
         pb.isDynamic = false
         
         pb.categoryBitMask = Constants.GroundCat
@@ -81,7 +81,7 @@ class World: SKNode, Entity {
         pb.allowsRotation = false
         pb.isDynamic = false
         pb.restitution = 0
-        pb.friction = 0.6
+        pb.friction = 0
         pb.categoryBitMask = Constants.GroundCat
         pb.collisionBitMask = Constants.LegendCat
         pb.contactTestBitMask = Constants.LegendCat

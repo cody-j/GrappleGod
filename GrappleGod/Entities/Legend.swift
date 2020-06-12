@@ -84,6 +84,21 @@ class Legend: SKSpriteNode, Entity {
         self.run(action)
     }
     
+    func slowDown() {
+        guard let xVelo = self.physicsBody?.velocity.dx else {
+            return
+        }
+        
+        if (xVelo == 0) {
+            return
+        }
+        
+        self.physicsBody?.velocity.dx = xVelo / 1.2
+//        let moveForce = Constants.LegendAcceleration.dx
+//        let withDirection = moveForce * CGFloat(self.direction * -1)
+//        let action = SKAction.applyForce(CGVector(dx: withDirection, dy: 0), duration: 0.1)
+//        self.run(action)
+    }
     
     func resetJumpNumber () -> Void {
         self.jumpNumber = 0
@@ -234,6 +249,10 @@ class Legend: SKSpriteNode, Entity {
         
         if self.isMoving {
             self.move()
+        } else {
+            if (!isGrappling && self.jumpNumber == 0) {
+                self.slowDown()
+            }
         }
 
     }
