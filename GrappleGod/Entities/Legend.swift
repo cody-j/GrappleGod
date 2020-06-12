@@ -84,6 +84,7 @@ class Legend: SKSpriteNode, Entity {
         self.run(action)
     }
     
+    
     func resetJumpNumber () -> Void {
         self.jumpNumber = 0
     }
@@ -155,24 +156,50 @@ class Legend: SKSpriteNode, Entity {
     
     func clampVelo () -> Void {
         let maxVelo = Constants.MaxVelocity
-        let deltaX = (self.physicsBody?.velocity.dx)!
-        let deltaY = (self.physicsBody?.velocity.dy)!
-
-
-        let deltaZ = sqrt(pow(deltaX, 2) + pow(deltaY, 2))
-
-
-        if  deltaZ > maxVelo {
-
-            let xProportion = deltaX / deltaZ
-            let yProportion = deltaY / deltaZ
-
-            let correctedDeltaX = xProportion * maxVelo
-            let correctedDeltaY = yProportion * maxVelo
-
-            self.physicsBody?.velocity = CGVector(dx: correctedDeltaX, dy: correctedDeltaY)
         
+        guard let xVelo = self.physicsBody?.velocity.dx else {
+            return
         }
+        
+        guard let yVelo = self.physicsBody?.velocity.dy else {
+            return
+        }
+        
+        var newXVelo = xVelo
+        var newYVelo = yVelo
+        
+        if (xVelo > maxVelo) {
+            newXVelo = maxVelo
+        } else if (xVelo < -maxVelo) {
+            newXVelo = -maxVelo
+        }
+        
+        if (yVelo > maxVelo) {
+            newYVelo = maxVelo
+        } else if (yVelo < -maxVelo) {
+            newYVelo = -maxVelo
+        }
+        
+        
+        self.physicsBody?.velocity = CGVector(dx: newXVelo, dy: newYVelo)
+//        let deltaX = (self.physicsBody?.velocity.dx)!
+//        let deltaY = (self.physicsBody?.velocity.dy)!
+//
+//
+//        let deltaZ = sqrt(pow(deltaX, 2) + pow(deltaY, 2))
+//
+//
+//        if  deltaZ > maxVelo {
+//
+//            let xProportion = deltaX / deltaZ
+//            let yProportion = deltaY / deltaZ
+//
+//            let correctedDeltaX = xProportion * maxVelo
+//            let correctedDeltaY = yProportion * maxVelo
+//
+//            self.physicsBody?.velocity = CGVector(dx: correctedDeltaX, dy: correctedDeltaY)
+//
+//        }
         
     }
 

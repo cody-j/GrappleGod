@@ -107,13 +107,12 @@ class World: SKNode, Entity {
 //            self.addChild(grapplePad)
             let worldBlock = WorldBlock(blockType: "straight", x: x, y: yCurrent)
             self.addChild(worldBlock)
+            let floorNode = generateFloorTile()
             
+            floorNode.position = CGPoint(x: CGFloat(CGFloat(i) * Constants.GroundTileSize.width), y: Constants.GroundLevel)
+            self.addChild(floorNode)
         }
         
-        let floorNode = generateFloorTile()
-        
-        floorNode.position = CGPoint(x: 0, y: Constants.GroundLevel)
-        self.addChild(floorNode)
         
 //        let worldBlock = WorldBlock(blockType: "straight", yStart: 200)
 //        self.addChild(worldBlock)
