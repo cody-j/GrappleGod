@@ -99,12 +99,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneProto {
                     self.grappleTouch = touch
                     self.legend.startGrapple()
                 
-                case Constants.GrappleBackName:
-                    if (self.grappleTouch != nil) {
-                        return
-                    }
-                    self.grappleTouch = touch
-                    self.legend.startGrapple(backwards: true)
+//                case Constants.GrappleBackName:
+//                    if (self.grappleTouch != nil) {
+//                        return
+//                    }
+//                    self.grappleTouch = touch
+//                    self.legend.startGrapple(backwards: true)
                     
                 case Constants.MoveName:
                     if (self.moveTouch != nil) {

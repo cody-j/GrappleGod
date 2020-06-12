@@ -137,11 +137,12 @@ class Legend: SKSpriteNode, Entity {
         self.isJumping = false
     }
     
-    func startGrapple(backwards: Bool = false) {
+    func startGrapple() {
         self.isGrappling = true
         guard let s = self.scene as? GameScene else {
             fatalError("Couldn't find scene starting grapple")
         }
+        let backwards = self.direction > 0 ? false : true
         s.grappleGun.shoot(backwards)
 //        self.grapple(contactNode, contactPoint)
 //        self.grapple.position = CGPoint(x: 3, y: 7)
