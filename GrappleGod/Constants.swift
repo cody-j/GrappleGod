@@ -35,6 +35,8 @@ struct Constants {
     static let Origin = CGPoint(x: CGFloat(0), y: CGFloat(0))
     static let RoofSize: CGSize =  CGSize(width: 1000, height: 40)
     static let RoofHeight: CGFloat = CGFloat(400)
+    static let GroundTileSize: CGSize =  CGSize(width: 1000, height: 400)
+    static let GroundLevel = CGFloat(-600)
     static let Paralax_1: CGFloat = CGFloat(-0.2)
     static let StartPlatformSize: CGSize = CGSize(width: 120*3, height: 27*3)
     static let GrapplePadSize: CGSize = CGSize(width: 300*3, height: 50*3)
@@ -66,8 +68,10 @@ struct Constants {
     static let LegendSpeedDamping: CGFloat = CGFloat(0)
     static let LegendAcceleration: CGVector = CGVector(dx: 400, dy: 0)
     static let LegendAccelerationDown: CGVector = CGVector(dx: 0, dy: -4000)
-    static let JumpForce: CGVector = CGVector(dx: 0, dy: 500)
+    static let JumpForce: CGVector = CGVector(dx: 0, dy: 630)
+    static let SecondJumpForce: CGVector = CGVector(dx: 0, dy: 430)
     static let LegendMass: CGFloat = 100
+    static let MaxVelocity: CGFloat = 1000
     
     // MARK: Grapple
     static let GrappleSize: CGSize = CGSize(width: 23, height: 23)

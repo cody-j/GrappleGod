@@ -26,13 +26,11 @@ class HUD: SKNode, Entity {
         
         let jumpButton = generateButton(name: Constants.JumpName, position: CGPoint(x: centerX + 190, y: centerY - 140))
         let grappleButton = generateButton(name: Constants.GrappleName, position: CGPoint(x: centerX + 280, y: centerY - 80))
-//        let grappleBackButton = generateButton(name: Constants.GrappleBackName, position: CGPoint(x: centerX + 190, y: centerY - 30))
         
         self.name = "HUD"
         self.zPosition = 100
         self.addChild(jumpButton)
         self.addChild(grappleButton)
-//        self.addChild(grappleBackButton)
         self.addChild(moveButton)
         self.addChild(moveBackButton)
         self.addChild(generateScoreLabel())

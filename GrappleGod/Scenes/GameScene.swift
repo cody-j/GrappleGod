@@ -98,14 +98,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneProto {
                     }
                     self.grappleTouch = touch
                     self.legend.startGrapple()
-                
-//                case Constants.GrappleBackName:
-//                    if (self.grappleTouch != nil) {
-//                        return
-//                    }
-//                    self.grappleTouch = touch
-//                    self.legend.startGrapple(backwards: true)
-                    
+
                 case Constants.MoveName:
                     if (self.moveTouch != nil) {
                         return
@@ -198,14 +191,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneProto {
         let isGrapple = B.name == Constants.GrappleName
         let isRoof = A.name == "roof"
 
+        print("a", A.name)
+        print("b", B.name)
+        let isGround = A.name == "ground"
+        let isLegend = B.name == "legend"
+        
         if isGrapple && isRoof {
             self.legend.swing(A, contact.contactPoint)
-//            self.legend.grappleGun.grapple.grappleHit(contact.contactPoint, A.physicsBody!)
-//            print(contact.contactPoint)
-//            print(self.legend.grapple.position)
-//            print("A", A.position)
-//            print("B", B.position)
-//            self.legend.grapple.hook(roof: contact.bodyA.node!, legend: self.legend, world: self.world, point: contact.contactPoint)
+        }
+        
+        if isGround && isLegend {
+            if (contact.contactNormal.dy > 0) {
+                self.legend.resetJumpNumber()
+            }
         }
 
     }

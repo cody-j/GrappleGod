@@ -26,8 +26,8 @@ class GrappleHook: SKSpriteNode, Entity {
         pb.allowsRotation = false
         pb.friction = 10
         pb.categoryBitMask = Constants.GrappleCat
-        pb.collisionBitMask = Constants.RoofCat | Constants.GroundCat
-        pb.contactTestBitMask = Constants.RoofCat | Constants.GroundCat
+        pb.collisionBitMask = Constants.RoofCat // | Constants.GroundCat
+        pb.contactTestBitMask = Constants.RoofCat // | Constants.GroundCat
         pb.usesPreciseCollisionDetection = true
         self.physicsBody = pb
 //        self.gun = gun

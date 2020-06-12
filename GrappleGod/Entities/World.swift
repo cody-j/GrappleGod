@@ -36,6 +36,7 @@ class World: SKNode, Entity {
         pb.restitution = 0
         pb.friction = 0.6
         pb.isDynamic = false
+        
         pb.categoryBitMask = Constants.GroundCat
         pb.collisionBitMask = Constants.LegendCat
         pb.contactTestBitMask = Constants.LegendCat
@@ -69,6 +70,26 @@ class World: SKNode, Entity {
     }
     
     
+    func generateFloorTile () -> SKSpriteNode {
+        let size = Constants.GroundTileSize
+        let node = SKSpriteNode(texture: SKTexture(imageNamed: "PlainHorizontal"), size: size)
+        node.name = "ground"
+        
+        let pb = SKPhysicsBody(rectangleOf: size)
+        
+        pb.affectedByGravity = false
+        pb.allowsRotation = false
+        pb.isDynamic = false
+        pb.restitution = 0
+        pb.friction = 0.6
+        pb.categoryBitMask = Constants.GroundCat
+        pb.collisionBitMask = Constants.LegendCat
+        pb.contactTestBitMask = Constants.LegendCat
+        node.physicsBody = pb
+
+        return node
+    }
+    
     func generateLevel() {
         
         let yStart = CGFloat(500)
@@ -88,6 +109,11 @@ class World: SKNode, Entity {
             self.addChild(worldBlock)
             
         }
+        
+        let floorNode = generateFloorTile()
+        
+        floorNode.position = CGPoint(x: 0, y: Constants.GroundLevel)
+        self.addChild(floorNode)
         
 //        let worldBlock = WorldBlock(blockType: "straight", yStart: 200)
 //        self.addChild(worldBlock)

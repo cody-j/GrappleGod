@@ -15,7 +15,7 @@ class Legend: SKSpriteNode, Entity {
     var direction: Int = 1
     var isJumping: Bool = false
     var isGrappling: Bool = false
-
+    var jumpNumber: Int = 0
     var ropeJoint: SKPhysicsJointSpring!
     // MARK: Child Nodes
 //    var grappleGun: GrappleGun!
@@ -39,17 +39,9 @@ class Legend: SKSpriteNode, Entity {
         pb.linearDamping = Constants.LegendSpeedDamping
         self.physicsBody = pb
         
-        
-//        self.grapple = Grapple()
-//        self.grappleGun = GrappleGun()
-//        self.addChild(self.grappleGun)
-//        self.giveGun()
     }
     
     func swing(_ node: SKNode, _ contactPoint: CGPoint) {
-        // remove existing joint before shooting new one
-        print("swinging")
-        
         guard let s = self.scene as? GameScene else {
             fatalError("No scene when attempting to grapple")
         }
@@ -69,6 +61,7 @@ class Legend: SKSpriteNode, Entity {
         self.ropeJoint = newJoint
         s.physicsWorld.add(newJoint)
         
+        self.jumpNumber = 1
     }
     
     func stopGrapple() {
@@ -82,13 +75,6 @@ class Legend: SKSpriteNode, Entity {
             gh.removeFromParent()
         }
     }
-//    func giveGun() {
-        
-//        let joint = SKPhysicsJointPin.joint(withBodyA: self.physicsBody!, bodyB: self.grappleGun.physicsBody!, anchor: Constants.Origin)
-//        self.scene?.physicsWorld.add(joint)
-//
-        
-//    }
     
     // MARK: Actions
     func move() {
@@ -98,20 +84,29 @@ class Legend: SKSpriteNode, Entity {
         self.run(action)
     }
     
+    func resetJumpNumber () -> Void {
+        self.jumpNumber = 0
+    }
+    
+    func getJumpForce () -> CGVector {
+        if (self.jumpNumber == 0) {
+            return Constants.JumpForce
+        } else if (self.jumpNumber == 1) {
+            return Constants.SecondJumpForce
+        }
+        
+        return CGVector(dx: 0, dy: 0)
+    }
+    
     func jump() {
-        let action = SKAction.applyImpulse(Constants.JumpForce, duration: 0.1)
+        if (self.jumpNumber > 1) {
+            return
+        }
+        self.physicsBody?.velocity.dy = 0
+        let force = getJumpForce()
+        let action = SKAction.applyImpulse(force, duration: 0.1)
         self.run(action)
-    }
-    
-    func grapple() {
-//        self.grappleGun.shoot()
-    }
-    
-    func releaseGrapple() {
-//        self.grappleGun.grapple.grappleCleanUp()
-        // remove grapple from scene
-        // reset position
-        // clean up joint
+        self.jumpNumber += 1
     }
     
     // MARK: Touch Handlers
@@ -157,19 +152,59 @@ class Legend: SKSpriteNode, Entity {
         self.stopGrapple()
     }
     
+    
+    func clampVelo () -> Void {
+        let maxVelo = Constants.MaxVelocity
+        let deltaX = (self.physicsBody?.velocity.dx)!
+        let deltaY = (self.physicsBody?.velocity.dy)!
+
+
+        let deltaZ = sqrt(pow(deltaX, 2) + pow(deltaY, 2))
+
+
+        if  deltaZ > maxVelo {
+
+            let xProportion = deltaX / deltaZ
+            let yProportion = deltaY / deltaZ
+
+            let correctedDeltaX = xProportion * maxVelo
+            let correctedDeltaY = yProportion * maxVelo
+
+            self.physicsBody?.velocity = CGVector(dx: correctedDeltaX, dy: correctedDeltaY)
+        
+        }
+        
+    }
+
     // MARK: Update
     func update(gameScene: GameSceneProto) {
         guard let xVelo = self.physicsBody?.velocity.dx else {
             return
         }
         
+        guard let yVelo = self.physicsBody?.velocity.dy else {
+            return
+        }
+        
+        self.clampVelo()
+        
+        if (yVelo > 0) {
+//            self.texture = SKTexture(imageNamed: "Jump")
+        } else if (yVelo == 0 && xVelo == 0) {
+            // static up down
+//            let textures = [SKTexture(imageNamed: "Up"), SKTexture(imageNamed: "Down")]
+//            let staticAnimation = SKAction.animate(with: textures, timePerFrame: 0.3)
+//            self.run(staticAnimation)
+        } else {
+//            self.texture = SKTexture(imageNamed: "Up")
+        }
+        
         if (self.direction < 0) {
             self.xScale = -1
         } else {
             self.xScale = 1;
-
-            print("backwards")
         }
+        
         if self.isMoving {
             self.move()
         }

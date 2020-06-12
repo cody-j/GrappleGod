@@ -16,8 +16,8 @@ class Camera: SKCameraNode, Entity {
         self.name = "Camera"
         self.position = Constants.Origin
         
-        self.xScale = 2.5
-        self.yScale = 2.5
+        self.xScale = 2.3
+        self.yScale = 2.3
     }
     
     func configure(gameScene: GameSceneProto) {
@@ -36,8 +36,9 @@ class Camera: SKCameraNode, Entity {
         
         let legendPosition = gameScene.legend.position
         
+        
         // Offset from bottom left
-        let xOffset = CGFloat(470)
+        let xOffset = CGFloat(420)
         let yOffset = CGFloat(120)
         
         let newX: CGFloat = legendPosition.x + xOffset
