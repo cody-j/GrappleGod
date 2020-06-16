@@ -75,7 +75,7 @@ struct Constants {
     
     // MARK: Grapple
     static let GrappleSize: CGSize = CGSize(width: 23, height: 23)
-    static let ShootGrappleForce: CGVector = CGVector(dx: 20, dy: 40)
-    static let ShootGrappleForceBackwards: CGVector = CGVector(dx: -20, dy: 40)
+    static let ShootGrappleForce: CGVector = CGVector(dx: 33, dy: 40)
+    static let ShootGrappleForceBackwards: CGVector = CGVector(dx: -33, dy: 40)
     
 }

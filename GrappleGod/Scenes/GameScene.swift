@@ -173,6 +173,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneProto {
     override func didFinishUpdate() {
         hud.update(gameScene: self)
         cameraNode.update(gameScene: self)
+        grappleGun.update(gameScene: self)
         
         if gameOver() {
             restartGame()
@@ -203,6 +204,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneProto {
         if isGround && isLegend {
             if (contact.contactNormal.dy > 0) {
                 self.legend.resetJumpNumber()
+            }
+            if (self.legend.isGrappling) {
+                self.legend.endGrapple()
             }
         }
 

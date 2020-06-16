@@ -17,6 +17,8 @@ class Legend: SKSpriteNode, Entity {
     var isGrappling: Bool = false
     var jumpNumber: Int = 0
     var ropeJoint: SKPhysicsJointSpring!
+    var legendState: String = "idle"
+    var prevLegendState: String = "idle"
     // MARK: Child Nodes
 //    var grappleGun: GrappleGun!
 //    var grapple: Grapple!
@@ -126,9 +128,15 @@ class Legend: SKSpriteNode, Entity {
         if (yVelo < CGFloat(0)) {
             self.physicsBody?.velocity.dy = 0
         }
+        
         let force = getJumpForce()
         let action = SKAction.applyImpulse(force, duration: 0.1)
         self.run(action)
+        if (self.jumpNumber == 1) {
+            self.texture = SKTexture(imageNamed: "rolling")
+            let animation = SKAction.animate(with: [SKTexture(imageNamed: "rolling")], timePerFrame: 0.5)
+            self.run(animation)
+        }
         self.jumpNumber += 1
     }
     
@@ -162,12 +170,6 @@ class Legend: SKSpriteNode, Entity {
         }
         let backwards = self.direction > 0 ? false : true
         s.grappleGun.shoot(backwards)
-//        self.grapple(contactNode, contactPoint)
-//        self.grapple.position = CGPoint(x: 3, y: 7)
-//        self.addChild(self.grapple)
-//        self.grapple.shoot()
-//        print("starting: ", self.grapple.position)
-        
     }
     
     func endGrapple() {
@@ -199,37 +201,27 @@ class Legend: SKSpriteNode, Entity {
             newXVelo = -maxVelo
         }
         
-//        if (yVelo > maxVelo) {
-//            newYVelo = maxVelo
-//        } else if (yVelo < -maxVelo) {
-//            newYVelo = -maxVelo
-//        }
-        
-        
         self.physicsBody?.velocity = CGVector(dx: newXVelo, dy: newYVelo)
-//        let deltaX = (self.physicsBody?.velocity.dx)!
-//        let deltaY = (self.physicsBody?.velocity.dy)!
-//
-//
-//        let deltaZ = sqrt(pow(deltaX, 2) + pow(deltaY, 2))
-//
-//
-//        if  deltaZ > maxVelo {
-//
-//            let xProportion = deltaX / deltaZ
-//            let yProportion = deltaY / deltaZ
-//
-//            let correctedDeltaX = xProportion * maxVelo
-//            let correctedDeltaY = yProportion * maxVelo
-//
-//            self.physicsBody?.velocity = CGVector(dx: correctedDeltaX, dy: correctedDeltaY)
-//
-//        }
+
         
     }
 
-    // MARK: Update
-    func update(gameScene: GameSceneProto) {
+    func updateLegendSprite () {
+        switch self.legendState {
+        case "idle":
+            self.texture = SKTexture(imageNamed: "Up")
+        case "jumping":
+            self.texture = SKTexture(imageNamed: "jumping")
+        case "falling":
+            self.texture = SKTexture(imageNamed: "falling")
+        case "rolling":
+            self.texture = SKTexture(imageNamed: "rolling")
+        default:
+            self.texture = SKTexture(imageNamed: "Up")
+        }
+    }
+
+    func setLegendState () {
         guard let xVelo = self.physicsBody?.velocity.dx else {
             return
         }
@@ -238,22 +230,33 @@ class Legend: SKSpriteNode, Entity {
             return
         }
         
+        if (yVelo > 0) {
+            self.legendState = "jumping"
+        } else if (yVelo < 0) {
+            self.legendState = "falling"
+        } else {
+            self.legendState = "idle"
+        }
+        
+    }
+    // MARK: Update
+    func update(gameScene: GameSceneProto) {
+        
         self.clampVelo()
         
-        if (yVelo > 0) {
-            self.texture = SKTexture(imageNamed: "jumping")
-        } else if (yVelo < 0) {
-            self.texture = SKTexture(imageNamed: "falling")
-        } else {
-            self.texture = SKTexture(imageNamed: "Up")
+        self.setLegendState()
+        
+        if (self.legendState != self.prevLegendState) {
+            self.updateLegendSprite()
         }
+        
         
         if (self.direction < 0) {
             self.xScale = -1
         } else {
             self.xScale = 1;
         }
-        
+
         if self.isMoving {
             self.move()
         } else {

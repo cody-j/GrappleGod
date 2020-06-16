@@ -15,7 +15,7 @@ class GrappleHook: SKSpriteNode, Entity {
     var gun: GrappleGun!
 
     init() {
-        let grappleSize = CGSize(width: 23, height: 23)
+        let grappleSize = CGSize(width: 15, height: 15)
         super.init(texture: SKTexture(imageNamed: "grapple"), color: .clear, size: grappleSize)
         self.name = Constants.GrappleName
         let pb = SKPhysicsBody(circleOfRadius: 6)
@@ -37,7 +37,9 @@ class GrappleHook: SKSpriteNode, Entity {
 //        guard let s = self.scene as? GameScene else {
 //            fatalError("Couldn't get scene shooting")
 //        }
-        
+        if (direction.dx < 0) {
+            self.xScale = -1
+        }
         let action = SKAction.applyImpulse(direction, duration: 0.1)
             
         self.run(action)

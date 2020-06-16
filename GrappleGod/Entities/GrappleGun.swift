@@ -10,7 +10,7 @@ import SpriteKit
 
 class GrappleGun: SKSpriteNode, Entity {
     
-//    var grapple: GrappleHook!
+    var rope: SKShapeNode? = nil
     
     init(holsterTo: SKNode) {
         let grappleSize = CGSize(width: 20, height: 10)
@@ -45,12 +45,37 @@ class GrappleGun: SKSpriteNode, Entity {
         s.grappleHook = GrappleHook()
         s.grappleHook.position = self.position
         s.addChild(s.grappleHook)
-        let direction = backwards ? Constants.ShootGrappleForceBackwards : Constants.ShootGrappleForce
+        let legendDirection = s.legend.direction
+        let dy = CGFloat(40)
+        var dx = CGFloat(23)
+        if let yVelo = s.legend.physicsBody?.velocity.dy {
+            if (yVelo < 0) {
+                dx = CGFloat(33)
+            }
+        }
+        dx = dx * legendDirection
+        let direction = CGVector(dx: dx, dy: dy)
         s.grappleHook.shoot(direction)
     }
 
     func update(gameScene: GameSceneProto) {
+        if (self.rope != nil) {
+            self.rope?.removeFromParent()
+        }
         
+        if (gameScene.legend.isGrappling) {
+            guard let hook = gameScene.grappleHook else {
+                return
+            }
+            
+            self.rope = SKShapeNode()
+            let ropePath = CGMutablePath()
+            ropePath.move(to: self.position)
+            ropePath.addLine(to: hook.position)
+            self.rope?.path = ropePath
+            self.rope?.strokeColor = SKColor.yellow
+            gameScene.addChild(self.rope!)
+        }
     }
 
     
